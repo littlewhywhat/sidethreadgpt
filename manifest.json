@@ -1,20 +1,22 @@
 {
   "manifest_version": 3,
-  "name": "ChatGPT Side Panel Hello World",
+  "name": "SideThreadGPT",
   "version": "0.1.0",
-  "description": "Basic extension that opens a side panel with ChatGPT iframe.",
+  "description": "ChatGPT Branching in a Sidebar",
   "action": {
-    "default_title": "Open Side Panel"
-  },
-  "background": {
-    "service_worker": "background.js"
+    "default_title": "Open SideThreadGPT"
   },
   "permissions": [
-    "sidePanel"
+    "storage"
   ],
-  "side_panel": {
-    "default_path": "sidepanel.html"
-  }
+  "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
 }
 
 
