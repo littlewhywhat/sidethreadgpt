@@ -16,9 +16,7 @@
       "128": "icons/icon128.png"
     }
   },
-  "permissions": [
-    "storage"
-  ],
+  "permissions": [],
   "content_scripts": [
     {
       "matches": ["https://chatgpt.com/*"],
