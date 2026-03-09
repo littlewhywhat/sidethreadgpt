@@ -10,6 +10,21 @@ const setConversationId = (doc = document) => {
   }
 };
 
+const isBranchingAvailable = () => {
+  const path = location.pathname;
+  if (path.includes("WEB:")) return false;
+  const parts = path.split("/").filter(Boolean);
+  return parts.length >= 2 && parts[0] === "c";
+};
+
+const getLastAssistantMessageId = () => {
+  const articles = document.querySelectorAll('article[data-turn="assistant"]');
+  if (!articles.length) return undefined;
+  const lastArticle = articles[articles.length - 1];
+  const messageEl = lastArticle.querySelector("div[data-message-id]");
+  return messageEl ? messageEl.getAttribute("data-message-id") : undefined;
+};
+
 const OVERLAY_IFRAME_ID = "sidethreadgpt-overlay-iframe";
 const sidebar = (() => {
   let styles = document.querySelector(`[style-tag="sidethreadgpt-styles"]`);
@@ -72,6 +87,16 @@ const sidebar = (() => {
             }
             `;
             contentIframe.contentDocument.head.appendChild(style);
+            const iframeKeyHandler = (e) => {
+              const isEscape = e.key === "Escape";
+              const isToggle = e.ctrlKey && e.shiftKey && e.key === "B";
+              if (isEscape || isToggle) {
+                e.preventDefault();
+                hideSidebar();
+              }
+            };
+            overlayIframe.contentDocument.addEventListener("keydown", iframeKeyHandler);
+            contentIframe.contentDocument.addEventListener("keydown", iframeKeyHandler);
             resolve();
           };
         };
@@ -92,7 +117,7 @@ const sidebar = (() => {
   };
 
   const getIsSidebarVisible = () => {
-    return styles.getAttribute("style-state") === "visible";
+    return styles && styles.getAttribute("style-state") === "visible";
   };
 
   return {
@@ -120,6 +145,7 @@ const SELECTOR =
   'article[data-turn="assistant"] > div > div > div.justify-start > div';
 
 const createActionButton = () => {
+  const available = isBranchingAvailable();
   const child = document.createElement("button");
   child.className =
     "text-token-text-secondary hover:bg-token-bg-secondary rounded-lg";
@@ -127,6 +153,13 @@ const createActionButton = () => {
   child.setAttribute("aria-pressed", "false");
   child.setAttribute("data-testid", "bad-response-turn-action-button");
   child.setAttribute("data-state", "closed");
+
+  if (!available) {
+    child.style.opacity = "0.4";
+    child.style.cursor = "not-allowed";
+    child.title =
+      "Branching is not available in chat branches or when not logged in";
+  }
 
   const span = document.createElement("span");
   span.className = "flex items-center justify-center touch:w-10 h-8 w-8";
@@ -164,7 +197,11 @@ const createActionButton = () => {
   span.appendChild(svg);
   child.appendChild(span);
 
-  child.addEventListener("click", () => {
+  child.addEventListener("click", (e) => {
+    if (!available) {
+      e.stopPropagation();
+      return;
+    }
     const article = child.closest("article");
     let messageId = undefined;
     if (article) {
@@ -223,5 +260,20 @@ function initInjection(doc = document) {
   obs.observe(doc.body, { childList: true, subtree: true });
 }
 
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && sidebar.getIsSidebarVisible()) {
+    sidebar.hideSidebar();
+    return;
+  }
+  if (e.ctrlKey && e.shiftKey && e.key === "B") {
+    e.preventDefault();
+    if (!isBranchingAvailable()) return;
+    if (sidebar.getIsSidebarVisible()) {
+      sidebar.hideSidebar();
+    } else {
+      createSidebar(getLastAssistantMessageId());
+    }
+  }
+});
+
 initInjection();
-console.log("content.js loaded");
