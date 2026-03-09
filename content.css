@@ -1,18 +1,78 @@
 iframe#sidethreadgpt-overlay-iframe {
-  /* transition */
   transition: 1.0s !important;
   transition-timing-function: ease-out;
-
-  /* display */
   display: block !important;
   position: fixed !important;
   top: 2% !important;
   right: -33vw !important;
   width: 33vw !important;
   height: 96% !important;
-
-  /* border */
   border-radius: 10px !important;
   border: solid 1px rgba(155, 155, 155, 0.18) !important;
   box-shadow: 4px 2px 12px 0 rgba(0, 0, 0, 0.12) !important;
+}
+
+#sidethreadgpt-pins-root {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 20001;
+  width: min(360px, calc(100vw - 32px));
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  background: rgba(23, 23, 23, 0.92);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+.sidethreadgpt-pins-title {
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sidethreadgpt-pins-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.sidethreadgpt-pin-item {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.sidethreadgpt-pin-open,
+.sidethreadgpt-pin-remove {
+  border: 0;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.08);
+  transition: background 0.2s ease;
+}
+
+.sidethreadgpt-pin-open:hover,
+.sidethreadgpt-pin-remove:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.sidethreadgpt-pin-open {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  text-align: left;
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.sidethreadgpt-pin-remove {
+  width: 36px;
+  border-radius: 12px;
+  font-size: 20px;
+  line-height: 1;
 }
