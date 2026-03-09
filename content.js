@@ -10,6 +10,21 @@ const setConversationId = (doc = document) => {
   }
 };
 
+const isBranchingAvailable = () => {
+  const path = location.pathname;
+  if (path.includes("WEB:")) return false;
+  const parts = path.split("/").filter(Boolean);
+  return parts.length >= 2 && parts[0] === "c";
+};
+
+const getLastAssistantMessageId = () => {
+  const articles = document.querySelectorAll('article[data-turn="assistant"]');
+  if (!articles.length) return undefined;
+  const lastArticle = articles[articles.length - 1];
+  const messageEl = lastArticle.querySelector("div[data-message-id]");
+  return messageEl ? messageEl.getAttribute("data-message-id") : undefined;
+};
+
 const OVERLAY_IFRAME_ID = "sidethreadgpt-overlay-iframe";
 const sidebar = (() => {
   let styles = document.querySelector(`[style-tag="sidethreadgpt-styles"]`);
@@ -72,6 +87,14 @@ const sidebar = (() => {
             }
             `;
             contentIframe.contentDocument.head.appendChild(style);
+            const iframeKeyHandler = (e) => {
+              if (e.key === "Escape" || (e.ctrlKey && e.shiftKey && e.key === "B")) {
+                e.preventDefault();
+                hideSidebar();
+              }
+            };
+            overlayIframe.contentDocument.addEventListener("keydown", iframeKeyHandler);
+            contentIframe.contentDocument.addEventListener("keydown", iframeKeyHandler);
             resolve();
           };
         };
@@ -89,10 +112,16 @@ const sidebar = (() => {
   const hideSidebar = () => {
     styles.setAttribute("style-state", "hidden");
     styles.sheet.cssRules[0].style = `transform: translateX(calc(33vw - 2%)) !important`;
+    const iframe = document.getElementById(OVERLAY_IFRAME_ID);
+    if (iframe) {
+      setTimeout(() => iframe.remove(), 1050);
+    }
+    const promptInput = document.querySelector('textarea[name="prompt-textarea"]');
+    if (promptInput) promptInput.focus();
   };
 
   const getIsSidebarVisible = () => {
-    return styles.getAttribute("style-state") === "visible";
+    return styles && styles.getAttribute("style-state") === "visible";
   };
 
   return {
@@ -115,11 +144,51 @@ const createSidebar = (() => {
   };
 })();
 
+const tooltip = (() => {
+  const el = document.createElement("div");
+  el.className = "relative z-50 select-none px-2 py-1 rounded-lg overflow-hidden dark bg-black max-w-xs";
+  el.style.cssText = "position:fixed;pointer-events:none;display:none;z-index:30000";
+  const wrap = document.createElement("div");
+  const title = document.createElement("div");
+  title.className = "text-token-text-primary text-xs font-semibold whitespace-pre-wrap text-center";
+  const lines = [document.createElement("div"), document.createElement("div")];
+  lines.forEach((l) => {
+    l.className = "text-token-text-tertiary text-xs font-medium whitespace-pre-wrap text-center";
+    wrap.appendChild(l);
+  });
+  wrap.insertBefore(title, wrap.firstChild);
+  el.appendChild(wrap);
+  document.body.appendChild(el);
+  let showTimeout = null;
+  return {
+    show(target, titleText, subs) {
+      clearTimeout(showTimeout);
+      showTimeout = setTimeout(() => {
+        title.textContent = titleText;
+        const arr = subs || [];
+        lines.forEach((l, i) => {
+          l.textContent = arr[i] || "";
+          l.style.display = arr[i] ? "block" : "none";
+        });
+        el.style.display = "block";
+        const r = target.getBoundingClientRect();
+        el.style.top = (r.bottom + 6) + "px";
+        el.style.left = (r.left + r.width / 2 - el.offsetWidth / 2) + "px";
+      }, 100);
+    },
+    hide() {
+      clearTimeout(showTimeout);
+      el.style.display = "none";
+    },
+  };
+})();
+
 const ADDED_ATTR = "data-cgpt-branching-added";
 const SELECTOR =
   'article[data-turn="assistant"] > div > div > div.justify-start > div';
 
 const createActionButton = () => {
+  const available = isBranchingAvailable();
   const child = document.createElement("button");
   child.className =
     "text-token-text-secondary hover:bg-token-bg-secondary rounded-lg";
@@ -127,6 +196,19 @@ const createActionButton = () => {
   child.setAttribute("aria-pressed", "false");
   child.setAttribute("data-testid", "bad-response-turn-action-button");
   child.setAttribute("data-state", "closed");
+
+  const tooltipTitle = available
+    ? "Branch conversation"
+    : "Not available in branches or when logged out";
+  const tooltipSubs = available ? ["Ctrl+Shift+B", "Esc to close"] : [];
+
+  if (!available) {
+    child.style.opacity = "0.4";
+    child.style.cursor = "not-allowed";
+  }
+
+  child.addEventListener("mouseenter", () => tooltip.show(child, tooltipTitle, tooltipSubs));
+  child.addEventListener("mouseleave", () => tooltip.hide());
 
   const span = document.createElement("span");
   span.className = "flex items-center justify-center touch:w-10 h-8 w-8";
@@ -164,7 +246,11 @@ const createActionButton = () => {
   span.appendChild(svg);
   child.appendChild(span);
 
-  child.addEventListener("click", () => {
+  child.addEventListener("click", (e) => {
+    if (!available) {
+      e.stopPropagation();
+      return;
+    }
     const article = child.closest("article");
     let messageId = undefined;
     if (article) {
@@ -223,5 +309,20 @@ function initInjection(doc = document) {
   obs.observe(doc.body, { childList: true, subtree: true });
 }
 
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && sidebar.getIsSidebarVisible()) {
+    sidebar.hideSidebar();
+    return;
+  }
+  if (e.ctrlKey && e.shiftKey && e.key === "B") {
+    e.preventDefault();
+    if (!isBranchingAvailable()) return;
+    if (sidebar.getIsSidebarVisible()) {
+      sidebar.hideSidebar();
+    } else {
+      createSidebar(getLastAssistantMessageId());
+    }
+  }
+});
+
 initInjection();
-console.log("content.js loaded");
