@@ -140,6 +140,6 @@ vite.config.ts.timestamp-*
 
 # build
 dist
-build
+release
 
 .DS_Store
