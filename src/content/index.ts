@@ -1,6 +1,6 @@
 import { h } from "preact";
 import { mountInline } from "../common/content/inline/mount";
-import { observeAndInject } from "../common/content/inline/observe-and-inject";
+import { observe } from "../common/content/inline/observe";
 import {
   getConversationIdFromUrl,
   getLastAssistantMessageId,
@@ -13,9 +13,9 @@ const ADDED_ATTR = "data-cgpt-branching-added";
 const SELECTOR =
   'article[data-turn="assistant"] > div > div > div.justify-start > div';
 
-observeAndInject({
+observe({
   selector: SELECTOR,
-  mount: (node) => {
+  onElement: (node) => {
     const container = document.createElement("div");
 
     const candidates = Array.from(
