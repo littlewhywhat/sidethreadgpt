@@ -38,10 +38,14 @@ const PinsSection = () => {
           height="16"
           aria-hidden="true"
           data-rtl-flip=""
-          class="h-3 w-3 shrink-0 group-hover/sidebar-expando-section:block"
+          class={
+            collapsed
+              ? "hidden h-3 w-3 shrink-0 group-hover/sidebar-expando-section:block"
+              : "invisible h-3 w-3 shrink-0 group-hover/sidebar-expando-section:visible"
+          }
         >
           <use
-            href="/cdn/assets/sprites-core-fk4oovux.svg#d3876b"
+            href={`/cdn/assets/sprites-core-fk4oovux.svg#${collapsed ? "d3876b" : "ba3792"}`}
             fill="currentColor"
           />
         </svg>
@@ -71,10 +75,8 @@ const PinsSection = () => {
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
                     aria-hidden="true"
-                    class="icon"
+                    class="icon-xs text-token-icon-tertiary opacity-50"
                   >
                     <use
                       href="/cdn/assets/sprites-core-fk4oovux.svg#a8c6bd"
