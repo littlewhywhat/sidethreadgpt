@@ -142,10 +142,9 @@ const PinItem = ({ pin }: { pin: Pin }) => {
           <span aria-hidden="true">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
               aria-hidden="true"
-              class="icon-xs text-token-icon-tertiary opacity-50"
+              class="icon-xs text-token-icon-tertiary"
+              style={{ opacity: 0.5 }}
             >
               <use
                 href="/cdn/assets/sprites-core-fk4oovux.svg#a8c6bd"
@@ -157,73 +156,70 @@ const PinItem = ({ pin }: { pin: Pin }) => {
         {menuOpen && (
           <div
             ref={menuRef}
+            role="menu"
+            aria-orientation="vertical"
+            onMouseLeave={() => setMenuOpen(false)}
+            class="z-50 max-w-xs rounded-2xl popover bg-token-main-surface-primary dark:bg-[#353535] shadow-long py-1.5"
+            tabIndex={-1}
             style={{
               position: "fixed",
               left: `${menuPos.left}px`,
               top: `${menuPos.top}px`,
               zIndex: 50,
               minWidth: "max-content",
+              outline: "none",
             }}
           >
             <div
-              role="menu"
-              aria-orientation="vertical"
-              class="z-50 max-w-xs rounded-2xl popover bg-token-main-surface-primary dark:bg-[#353535] shadow-long py-1.5"
-              tabIndex={-1}
-              style={{ outline: "none" }}
+              role="menuitem"
+              tabIndex={0}
+              class="group __menu-item hoverable gap-1.5"
+              onClick={handleStartRename}
+              onKeyDown={(e: KeyboardEvent) => {
+                if (e.key === "Enter")
+                  handleStartRename(e as unknown as MouseEvent);
+              }}
             >
-              <div
-                role="menuitem"
-                tabIndex={0}
-                class="group __menu-item gap-1.5"
-                onClick={handleStartRename}
-                onKeyDown={(e: KeyboardEvent) => {
-                  if (e.key === "Enter")
-                    handleStartRename(e as unknown as MouseEvent);
-                }}
-              >
-                <div class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    aria-hidden="true"
-                    class="icon"
-                  >
-                    <use
-                      href="/cdn/assets/sprites-core-fk4oovux.svg#6d87e1"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-                Rename
+              <div class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#6d87e1"
+                    fill="currentColor"
+                  />
+                </svg>
               </div>
-              <div
-                role="menuitem"
-                tabIndex={0}
-                class="group __menu-item gap-1.5"
-                onClick={handleUnpin}
-                onKeyDown={(e: KeyboardEvent) => {
-                  if (e.key === "Enter")
-                    handleUnpin(e as unknown as MouseEvent);
-                }}
-              >
-                <div class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    aria-hidden="true"
-                    class="icon"
-                  >
-                    <use
-                      href="/cdn/assets/sprites-core-fk4oovux.svg#a8c6bd"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-                Unpin
+              Rename
+            </div>
+            <div
+              role="menuitem"
+              tabIndex={0}
+              class="group __menu-item hoverable gap-1.5"
+              onClick={handleUnpin}
+              onKeyDown={(e: KeyboardEvent) => {
+                if (e.key === "Enter") handleUnpin(e as unknown as MouseEvent);
+              }}
+            >
+              <div class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#a8c6bd"
+                    fill="currentColor"
+                  />
+                </svg>
               </div>
+              Unpin
             </div>
           </div>
         )}
