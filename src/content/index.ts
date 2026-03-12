@@ -6,8 +6,12 @@ import {
   getLastAssistantMessageId,
   isBranchingAvailable,
 } from "../utils/chatgpt";
+import {
+  getIsSidebarVisible,
+  hideSidebar,
+  showSidebar,
+} from "./floating/sidebar";
 import { BranchButton } from "./inline/components/BranchButton";
-import { getIsSidebarVisible, hideSidebar, showSidebar } from "./sidebar";
 
 const ADDED_ATTR = "data-cgpt-branching-added";
 const SELECTOR =

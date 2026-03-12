@@ -1,7 +1,7 @@
 import { h } from "preact";
-import { mountFloating } from "../common/content/floating/mount";
-import { getBranchUrl } from "../utils/chatgpt";
-import { SidebarOverlay } from "./floating/components/SidebarOverlay";
+import { mountFloating } from "../../common/content/floating/mount";
+import { getBranchUrl } from "../../utils/chatgpt";
+import { SidebarOverlay } from "./components/SidebarOverlay";
 
 type SidebarState = {
   host: HTMLDivElement;
