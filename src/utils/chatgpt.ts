@@ -18,8 +18,18 @@ const getLastAssistantMessageId = (): string | undefined => {
   return messageEl?.getAttribute("data-message-id") ?? undefined;
 };
 
+const getBranchUrl = (
+  conversationId: string | null,
+  messageId: string | undefined,
+): string => {
+  const convSuffix = conversationId ? `/${conversationId}` : "";
+  const messageSuffix = messageId ? `/${messageId}` : "";
+  return `https://chatgpt.com/branch${convSuffix}${messageSuffix}`;
+};
+
 export {
   getConversationIdFromUrl,
   isBranchingAvailable,
   getLastAssistantMessageId,
+  getBranchUrl,
 };

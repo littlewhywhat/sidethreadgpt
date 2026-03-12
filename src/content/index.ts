@@ -5,7 +5,7 @@ import {
   getConversationIdFromUrl,
   getLastAssistantMessageId,
   isBranchingAvailable,
-} from "./conversation";
+} from "../utils/chatgpt";
 import { BranchButton } from "./inline/components/BranchButton";
 import { getIsSidebarVisible, hideSidebar, showSidebar } from "./sidebar";
 

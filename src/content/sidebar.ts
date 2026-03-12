@@ -1,5 +1,6 @@
 import { h } from "preact";
 import { mountFloating } from "../common/content/floating/mount";
+import { getBranchUrl } from "../utils/chatgpt";
 import { SidebarOverlay } from "./floating/components/SidebarOverlay";
 
 type SidebarState = {
@@ -33,9 +34,7 @@ const showSidebar = (
     return;
   }
 
-  const convSuffix = conversationId ? `/${conversationId}` : "";
-  const messageSuffix = messageId ? `/${messageId}` : "";
-  const src = `https://chatgpt.com/branch${convSuffix}${messageSuffix}`;
+  const src = getBranchUrl(conversationId, messageId);
 
   const { host, dispose } = mountFloating(
     h(SidebarOverlay, { src, onClose: hideSidebar }),
