@@ -35,9 +35,24 @@ const showSidebar = (
   }
 
   const src = getBranchUrl(conversationId, messageId);
+  const bgColor = getComputedStyle(document.body).backgroundColor;
 
   const { host, dispose } = mountFloating(
     h(SidebarOverlay, { src, onClose: hideSidebar }),
+    [
+      "position:fixed",
+      "z-index:2147483647",
+      "top:2%",
+      "right:1%",
+      "width:33vw",
+      "height:96%",
+      "transform:translateX(calc(100% + 1vw))",
+      "border-radius:10px",
+      "overflow:hidden",
+      "border:solid 1px rgba(155,155,155,0.18)",
+      "box-shadow:-4px 0 12px 0 rgba(0,0,0,0.12)",
+      `background-color:${bgColor}`,
+    ].join(";"),
   );
   sidebar = { host, dispose };
 
