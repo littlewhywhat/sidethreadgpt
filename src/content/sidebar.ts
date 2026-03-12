@@ -1,6 +1,6 @@
 import { h } from "preact";
+import { mountFloating } from "../common/content/floating/mount";
 import { SidebarOverlay } from "./floating/components/SidebarOverlay";
-import { mountFloating } from "./floating/mount";
 
 type SidebarState = {
   host: HTMLDivElement;

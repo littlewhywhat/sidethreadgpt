@@ -1,12 +1,12 @@
 import { h } from "preact";
+import { mountInline } from "../common/content/inline/mount";
+import { observeAndInject } from "../common/content/inline/observe-and-inject";
 import {
   getConversationIdFromUrl,
   getLastAssistantMessageId,
   isBranchingAvailable,
 } from "./conversation";
 import { BranchButton } from "./inline/components/BranchButton";
-import { mountInline } from "./inline/mount";
-import { observeAndInject } from "./inline/observe-and-inject";
 import { getIsSidebarVisible, hideSidebar, showSidebar } from "./sidebar";
 
 const ADDED_ATTR = "data-cgpt-branching-added";

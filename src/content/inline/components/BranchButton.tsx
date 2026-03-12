@@ -1,5 +1,5 @@
 import { useRef } from "preact/hooks";
-import * as tooltip from "../../tooltip";
+import * as tooltip from "../../../common/content/tooltip";
 
 type BranchButtonProps = {
   available: boolean;
