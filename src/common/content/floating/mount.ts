@@ -1,4 +1,4 @@
-import { render, type VNode } from "preact";
+import { h, render, type VNode } from "preact";
 
 const mountFloating = (
   // biome-ignore lint/suspicious/noExplicitAny: VNode type parameter is contravariant
@@ -25,15 +25,12 @@ const mountFloating = (
   document.body.appendChild(host);
 
   const shadow = host.attachShadow({ mode: "open" });
-  const root = document.createElement("div");
-  root.style.cssText = "width:100%;height:100%;";
-  shadow.appendChild(root);
-  render(vnode, root);
+  render(h("div", { style: "width:100%;height:100%;" }, vnode), shadow);
 
   return {
     host,
     dispose: () => {
-      render(null, root);
+      render(null, shadow);
       host.remove();
     },
   };
