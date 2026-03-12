@@ -1,6 +1,7 @@
 import { h } from "preact";
-import { SidebarOverlay } from "./floating/components/SidebarOverlay";
-import { mountFloating } from "./floating/mount";
+import { mountFloating } from "../../common/content/floating/mount";
+import { getBranchUrl } from "../../utils/chatgpt";
+import { SidebarOverlay } from "./components/SidebarOverlay";
 
 type SidebarState = {
   host: HTMLDivElement;
@@ -33,12 +34,25 @@ const showSidebar = (
     return;
   }
 
-  const convSuffix = conversationId ? `/${conversationId}` : "";
-  const messageSuffix = messageId ? `/${messageId}` : "";
-  const src = `https://chatgpt.com/branch${convSuffix}${messageSuffix}`;
+  const src = getBranchUrl(conversationId, messageId);
+  const bgColor = getComputedStyle(document.body).backgroundColor;
 
   const { host, dispose } = mountFloating(
     h(SidebarOverlay, { src, onClose: hideSidebar }),
+    [
+      "position:fixed",
+      "z-index:2147483647",
+      "top:2%",
+      "right:1%",
+      "width:33vw",
+      "height:96%",
+      "transform:translateX(calc(100% + 1vw))",
+      "border-radius:10px",
+      "overflow:hidden",
+      "border:solid 1px rgba(155,155,155,0.18)",
+      "box-shadow:-4px 0 12px 0 rgba(0,0,0,0.12)",
+      `background-color:${bgColor}`,
+    ].join(";"),
   );
   sidebar = { host, dispose };
 

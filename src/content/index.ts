@@ -1,56 +1,16 @@
-import { h } from "preact";
 import {
   getConversationIdFromUrl,
   getLastAssistantMessageId,
   isBranchingAvailable,
-} from "./conversation";
-import { BranchButton } from "./inline/components/BranchButton";
-import { mountInline } from "./inline/mount";
-import { observeAndInject } from "./inline/observe-and-inject";
-import { getIsSidebarVisible, hideSidebar, showSidebar } from "./sidebar";
+} from "../utils/chatgpt";
+import {
+  getIsSidebarVisible,
+  hideSidebar,
+  showSidebar,
+} from "./floating/sidebar";
+import { initBranchChatButtons } from "./inline/inject-branch-button";
 
-const ADDED_ATTR = "data-cgpt-branching-added";
-const SELECTOR =
-  'article[data-turn="assistant"] > div > div > div.justify-start > div';
-
-observeAndInject({
-  selector: SELECTOR,
-  mount: (node) => {
-    const container = document.createElement("div");
-
-    const candidates = Array.from(
-      node.querySelectorAll('[aria-haspopup="menu"]'),
-    );
-    const target =
-      candidates.find((el) => !el.closest("span")) ?? candidates[0] ?? null;
-    let beforeEl: Element | null = target;
-    while (beforeEl?.parentElement && beforeEl.parentElement !== node) {
-      beforeEl = beforeEl.parentElement;
-    }
-
-    if (beforeEl?.parentElement === node)
-      node.insertBefore(container, beforeEl);
-    else if (node.lastElementChild)
-      node.insertBefore(container, node.lastElementChild);
-    else node.appendChild(container);
-
-    const { dispose } = mountInline(
-      container,
-      h(BranchButton, {
-        available: isBranchingAvailable(),
-        onBranch: (messageId) => {
-          showSidebar(getConversationIdFromUrl(), messageId);
-        },
-      }),
-    );
-
-    return () => {
-      dispose();
-      container.remove();
-    };
-  },
-  markerAttr: ADDED_ATTR,
-});
+initBranchChatButtons();
 
 document.addEventListener("click", () => {
   if (getIsSidebarVisible()) hideSidebar();
