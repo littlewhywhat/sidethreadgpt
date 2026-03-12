@@ -11,9 +11,11 @@ const VISIBLE_LIMIT = 5;
 
 const PinItem = ({ pin }: { pin: Pin }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuPos, setMenuPos] = useState({ left: 0, top: 0 });
   const [renaming, setRenaming] = useState(false);
   const [renameValue, setRenameValue] = useState(pin.preview);
   const menuRef = useRef<HTMLDivElement>(null);
+  const menuBtnRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const pinKey = `${pin.conversationId}:${pin.messageId}`;
@@ -43,6 +45,10 @@ const PinItem = ({ pin }: { pin: Pin }) => {
   const handleMenuClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    if (!menuOpen && menuBtnRef.current) {
+      const rect = menuBtnRef.current.getBoundingClientRect();
+      setMenuPos({ left: rect.left, top: rect.bottom + 4 });
+    }
     setMenuOpen((v) => !v);
   };
 
@@ -106,9 +112,10 @@ const PinItem = ({ pin }: { pin: Pin }) => {
           <div class="truncate">{pin.preview || "Pinned message"}</div>
         )}
       </div>
-      <div class="trailing-pair" style={{ position: "relative" }}>
+      <div class="trailing-pair">
         <div class="trailing highlight text-token-text-tertiary">
           <button
+            ref={menuBtnRef}
             tabIndex={0}
             data-trailing-button=""
             class="__menu-item-trailing-btn"
@@ -150,32 +157,74 @@ const PinItem = ({ pin }: { pin: Pin }) => {
         {menuOpen && (
           <div
             ref={menuRef}
-            role="menu"
             style={{
-              position: "absolute",
-              right: 0,
-              top: "100%",
+              position: "fixed",
+              left: `${menuPos.left}px`,
+              top: `${menuPos.top}px`,
               zIndex: 50,
-              minWidth: "140px",
+              minWidth: "max-content",
             }}
-            class="bg-token-surface-primary shadow-lg rounded-lg border border-token-border-light py-1"
           >
-            <button
-              type="button"
-              role="menuitem"
-              class="flex w-full items-center gap-2 px-3 py-2 text-sm text-token-text-primary hover:bg-token-bg-secondary"
-              onClick={handleStartRename}
+            <div
+              role="menu"
+              aria-orientation="vertical"
+              class="z-50 max-w-xs rounded-2xl popover bg-token-main-surface-primary dark:bg-[#353535] shadow-long py-1.5"
+              tabIndex={-1}
+              style={{ outline: "none" }}
             >
-              Rename
-            </button>
-            <button
-              type="button"
-              role="menuitem"
-              class="flex w-full items-center gap-2 px-3 py-2 text-sm text-token-text-primary hover:bg-token-bg-secondary"
-              onClick={handleUnpin}
-            >
-              Unpin
-            </button>
+              <div
+                role="menuitem"
+                tabIndex={0}
+                class="group __menu-item gap-1.5"
+                onClick={handleStartRename}
+                onKeyDown={(e: KeyboardEvent) => {
+                  if (e.key === "Enter")
+                    handleStartRename(e as unknown as MouseEvent);
+                }}
+              >
+                <div class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                    class="icon"
+                  >
+                    <use
+                      href="/cdn/assets/sprites-core-fk4oovux.svg#6d87e1"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+                Rename
+              </div>
+              <div
+                role="menuitem"
+                tabIndex={0}
+                class="group __menu-item gap-1.5"
+                onClick={handleUnpin}
+                onKeyDown={(e: KeyboardEvent) => {
+                  if (e.key === "Enter")
+                    handleUnpin(e as unknown as MouseEvent);
+                }}
+              >
+                <div class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                    class="icon"
+                  >
+                    <use
+                      href="/cdn/assets/sprites-core-fk4oovux.svg#a8c6bd"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+                Unpin
+              </div>
+            </div>
           </div>
         )}
       </div>
