@@ -8,9 +8,9 @@ import {
   hideSidebar,
   showSidebar,
 } from "./floating/sidebar";
-import { injectBranchButtons } from "./inline/inject-branch-button";
+import { initBranchChatButtons } from "./inline/inject-branch-button";
 
-injectBranchButtons();
+initBranchChatButtons();
 
 document.addEventListener("click", () => {
   if (getIsSidebarVisible()) hideSidebar();

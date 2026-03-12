@@ -12,7 +12,7 @@ const ADDED_ATTR = "data-cgpt-branching-added";
 const SELECTOR =
   'article[data-turn="assistant"] > div > div > div.justify-start > div';
 
-const injectBranchButtons = () =>
+const initBranchChatButtons = () =>
   observe({
     selector: SELECTOR,
     onElement: (node) => {
@@ -52,4 +52,4 @@ const injectBranchButtons = () =>
     markerAttr: ADDED_ATTR,
   });
 
-export { injectBranchButtons };
+export { initBranchChatButtons };
