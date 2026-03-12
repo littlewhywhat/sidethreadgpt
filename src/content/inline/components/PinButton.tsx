@@ -20,8 +20,12 @@ const resolveMessageId = (btn: HTMLElement): string | undefined => {
 const extractPreview = (btn: HTMLElement): string => {
   const article = btn.closest("article");
   if (!article) return "";
-  const text = article.textContent ?? "";
-  return text.trim().slice(0, 60);
+  const msgEl = article.querySelector("div[data-message-id]");
+  const text = (msgEl ?? article).textContent ?? "";
+  return text
+    .trim()
+    .replace(/^ChatGPT\s*(said)?:?\s*/i, "")
+    .slice(0, 60);
 };
 
 const PinButton = ({ available }: PinButtonProps) => {
