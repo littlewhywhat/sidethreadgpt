@@ -142,9 +142,10 @@ const PinItem = ({ pin }: { pin: Pin }) => {
           <span aria-hidden="true">
             <svg
               xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
               aria-hidden="true"
-              class="icon-xs text-token-icon-tertiary"
-              style={{ opacity: 0.5 }}
+              class="icon-xs text-token-icon-tertiary opacity-50"
             >
               <use
                 href="/cdn/assets/sprites-core-fk4oovux.svg#a8c6bd"
@@ -159,7 +160,7 @@ const PinItem = ({ pin }: { pin: Pin }) => {
             role="menu"
             aria-orientation="vertical"
             onMouseLeave={() => setMenuOpen(false)}
-            class="z-50 max-w-xs rounded-2xl popover bg-token-main-surface-primary dark:bg-[#353535] shadow-long py-1.5"
+            class="z-50 flex flex-col max-w-xs rounded-2xl popover bg-token-main-surface-primary dark:bg-[#353535] shadow-long py-1.5"
             tabIndex={-1}
             style={{
               position: "fixed",
