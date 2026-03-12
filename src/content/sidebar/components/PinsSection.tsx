@@ -160,7 +160,7 @@ const PinItem = ({ pin }: { pin: Pin }) => {
             role="menu"
             aria-orientation="vertical"
             onMouseLeave={() => setMenuOpen(false)}
-            class="z-50 flex flex-col max-w-xs rounded-2xl popover bg-token-main-surface-primary dark:bg-[#353535] shadow-long py-1.5"
+            class="z-50 flex flex-col max-w-xs rounded-2xl popover bg-token-main-surface-primary dark:bg-[#353535] shadow-long py-1.5 px-1.5"
             tabIndex={-1}
             style={{
               position: "fixed",
@@ -174,7 +174,7 @@ const PinItem = ({ pin }: { pin: Pin }) => {
             <div
               role="menuitem"
               tabIndex={0}
-              class="group __menu-item hoverable gap-1.5"
+              class="group __menu-item hoverable gap-1.5 w-full"
               onClick={handleStartRename}
               onKeyDown={(e: KeyboardEvent) => {
                 if (e.key === "Enter")
@@ -200,7 +200,7 @@ const PinItem = ({ pin }: { pin: Pin }) => {
             <div
               role="menuitem"
               tabIndex={0}
-              class="group __menu-item hoverable gap-1.5"
+              class="group __menu-item hoverable gap-1.5 w-full"
               onClick={handleUnpin}
               onKeyDown={(e: KeyboardEvent) => {
                 if (e.key === "Enter") handleUnpin(e as unknown as MouseEvent);
@@ -215,7 +215,7 @@ const PinItem = ({ pin }: { pin: Pin }) => {
                   class="icon"
                 >
                   <use
-                    href="/cdn/assets/sprites-core-fk4oovux.svg#a8c6bd"
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#13322a"
                     fill="currentColor"
                   />
                 </svg>
@@ -250,7 +250,7 @@ const PinsSection = () => {
         onClick={() => setCollapsed((c) => !c)}
       >
         <h2 class="__menu-label" data-no-spacing="true">
-          Pinned
+          Pinned replies
         </h2>
         <svg
           xmlns="http://www.w3.org/2000/svg"
