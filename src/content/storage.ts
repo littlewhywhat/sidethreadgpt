@@ -64,5 +64,18 @@ const onPinsChange = (cb: Listener): (() => void) => {
   };
 };
 
-export { getPins, addPin, removePin, isPinned, onPinsChange };
+const updatePinPreview = (
+  conversationId: string,
+  messageId: string,
+  preview: string,
+): void => {
+  const pins = readPins().map((p) =>
+    p.conversationId === conversationId && p.messageId === messageId
+      ? { ...p, preview }
+      : p,
+  );
+  writePins(pins);
+};
+
+export { getPins, addPin, removePin, isPinned, onPinsChange, updatePinPreview };
 export type { Pin };
