@@ -17,7 +17,8 @@ const BranchButton = ({ available, onBranch }: BranchButtonProps) => {
   const handleClick = (e: MouseEvent) => {
     e.stopPropagation();
     if (!available) return;
-    const btn = ref.current!;
+    const btn = ref.current;
+    if (!btn) return;
     const article = btn.closest("article");
     let messageId: string | undefined;
     if (article) {
@@ -42,7 +43,9 @@ const BranchButton = ({ available, onBranch }: BranchButtonProps) => {
       data-testid="bad-response-turn-action-button"
       data-state="closed"
       style={available ? undefined : { opacity: 0.4, cursor: "not-allowed" }}
-      onMouseEnter={() => tooltip.show(ref.current!, tooltipTitle, tooltipSubs)}
+      onMouseEnter={() => {
+        if (ref.current) tooltip.show(ref.current, tooltipTitle, tooltipSubs);
+      }}
       onMouseLeave={() => tooltip.hide()}
       onClick={handleClick}
     >
