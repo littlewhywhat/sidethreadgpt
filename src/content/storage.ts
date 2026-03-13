@@ -38,7 +38,12 @@ const onPinsChange = (cb: Listener): (() => void) => {
     const raw = changes[STORAGE_KEY].newValue;
     if (raw === undefined) return;
     try {
-      const pins = typeof raw === "string" ? (JSON.parse(raw) as Pin[]) : raw;
+      const pins: Pin[] =
+        typeof raw === "string"
+          ? (JSON.parse(raw) as Pin[])
+          : Array.isArray(raw)
+            ? raw
+            : [];
       cb(pins);
     } catch {
       cb([]);

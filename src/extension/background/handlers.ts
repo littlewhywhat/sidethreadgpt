@@ -1,3 +1,4 @@
+import type { Pin } from "../../types/messages";
 import { onBackgroundMessage, sendToTab } from "../shared/messaging";
 
 const STORAGE_KEY = "sidethreadgpt-pins";
@@ -6,7 +7,8 @@ const MAX_PINS = 1000;
 const readPins = async (): Promise<Pin[]> => {
   const result = await chrome.storage.sync.get(STORAGE_KEY);
   const raw = result[STORAGE_KEY];
-  if (!raw) return [];
+  if (raw == null) return [];
+  if (typeof raw !== "string") return [];
   try {
     return JSON.parse(raw) as Pin[];
   } catch {
@@ -34,6 +36,7 @@ const registerHandlers = () => {
     );
     filtered.unshift(pin);
     await writePins(filtered.slice(0, MAX_PINS));
+    return undefined;
   });
 
   onBackgroundMessage("pins-remove", async ({ conversationId, messageId }) => {
@@ -43,6 +46,7 @@ const registerHandlers = () => {
         !(p.conversationId === conversationId && p.messageId === messageId),
     );
     await writePins(filtered);
+    return undefined;
   });
 
   onBackgroundMessage(
@@ -55,6 +59,7 @@ const registerHandlers = () => {
           : p,
       );
       await writePins(updated);
+      return undefined;
     },
   );
 
@@ -62,6 +67,7 @@ const registerHandlers = () => {
     if (sender.tab?.id != null) {
       sendToTab(sender.tab.id, "show-unpin-modal", pin);
     }
+    return undefined;
   });
 };
 

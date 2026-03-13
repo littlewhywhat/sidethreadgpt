@@ -6,7 +6,14 @@ import { removePin } from "../../storage";
 const UnpinModalHost = () => {
   const [pin, setPin] = useState<Pin | null>(null);
 
-  useEffect(() => onContentMessage("show-unpin-modal", (p) => setPin(p)), []);
+  useEffect(
+    () =>
+      onContentMessage("show-unpin-modal", (p) => {
+        setPin(p);
+        return undefined;
+      }),
+    [],
+  );
 
   if (!pin) return null;
 
