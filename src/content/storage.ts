@@ -1,67 +1,54 @@
-type Pin = {
-  conversationId: string;
-  messageId: string;
-  preview: string;
-  pinnedAt: number;
-};
+import type { Pin } from "../types/messages";
+import { sendMessage } from "./messaging";
 
 const STORAGE_KEY = "sidethreadgpt-pins";
-const MAX_PINS = 1000;
 
 type Listener = (pins: Pin[]) => void;
-const listeners = new Set<Listener>();
 
-const readPins = (): Pin[] => {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as Pin[]) : [];
-  } catch {
-    return [];
-  }
+const getPins = (): Pin[] => [];
+
+const loadPins = async (): Promise<Pin[]> => {
+  return sendMessage("pins-get", undefined);
 };
-
-const writePins = (pins: Pin[]): void => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(pins));
-  for (const fn of listeners) fn(pins);
-};
-
-const getPins = (): Pin[] => readPins();
 
 const addPin = (pin: Pin): void => {
-  const pins = readPins().filter(
-    (p) =>
-      !(
-        p.conversationId === pin.conversationId && p.messageId === pin.messageId
-      ),
-  );
-  pins.unshift(pin);
-  writePins(pins.slice(0, MAX_PINS));
+  sendMessage("pins-add", pin);
 };
 
 const removePin = (conversationId: string, messageId: string): void => {
-  const pins = readPins().filter(
-    (p) => !(p.conversationId === conversationId && p.messageId === messageId),
-  );
-  writePins(pins);
+  sendMessage("pins-remove", { conversationId, messageId });
 };
 
-const isPinned = (conversationId: string, messageId: string): boolean =>
-  readPins().some(
+const isPinned = async (
+  conversationId: string,
+  messageId: string,
+): Promise<boolean> => {
+  const pins = await loadPins();
+  return pins.some(
     (p) => p.conversationId === conversationId && p.messageId === messageId,
   );
+};
 
 const onPinsChange = (cb: Listener): (() => void) => {
-  listeners.add(cb);
-
-  const storageHandler = (e: StorageEvent) => {
-    if (e.key === STORAGE_KEY) cb(readPins());
+  const handler = (
+    changes: { [key: string]: chrome.storage.StorageChange },
+    areaName: string,
+  ) => {
+    if (areaName !== "sync" || !changes[STORAGE_KEY]) return;
+    const raw = changes[STORAGE_KEY].newValue;
+    if (raw === undefined) return;
+    try {
+      const pins = typeof raw === "string" ? (JSON.parse(raw) as Pin[]) : raw;
+      cb(pins);
+    } catch {
+      cb([]);
+    }
   };
-  window.addEventListener("storage", storageHandler);
+  chrome.storage.onChanged.addListener(handler);
 
-  return () => {
-    listeners.delete(cb);
-    window.removeEventListener("storage", storageHandler);
-  };
+  loadPins().then(cb);
+
+  return () => chrome.storage.onChanged.removeListener(handler);
 };
 
 const updatePinPreview = (
@@ -69,13 +56,20 @@ const updatePinPreview = (
   messageId: string,
   preview: string,
 ): void => {
-  const pins = readPins().map((p) =>
-    p.conversationId === conversationId && p.messageId === messageId
-      ? { ...p, preview }
-      : p,
-  );
-  writePins(pins);
+  sendMessage("pins-update-preview", {
+    conversationId,
+    messageId,
+    preview,
+  });
 };
 
-export { getPins, addPin, removePin, isPinned, onPinsChange, updatePinPreview };
+export {
+  getPins,
+  loadPins,
+  addPin,
+  removePin,
+  isPinned,
+  onPinsChange,
+  updatePinPreview,
+};
 export type { Pin };

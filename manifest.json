@@ -16,7 +16,11 @@
       "128": "icons/icon128.png"
     }
   },
-  "permissions": [],
+  "permissions": ["storage"],
+  "background": {
+    "service_worker": "src/extension/background/index.ts",
+    "type": "module"
+  },
   "content_scripts": [
     {
       "matches": [
