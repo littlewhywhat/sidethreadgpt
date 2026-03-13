@@ -9,10 +9,10 @@ type BranchButtonProps = {
 const BranchButton = ({ available, onBranch }: BranchButtonProps) => {
   const ref = useRef<HTMLButtonElement>(null);
 
-  const tooltipTitle = available
-    ? "Branch conversation"
-    : "Not available in branches or when logged out";
-  const tooltipSubs = available ? ["Ctrl+Shift+B", "Esc to close"] : [];
+  const tooltipTitle = available ? "Branch conversation" : "Not available";
+  const tooltipSubs = available
+    ? ["Ctrl+Shift+B", "Esc to close"]
+    : ["in branches or when logged out"];
 
   const handleClick = (e: MouseEvent) => {
     e.stopPropagation();

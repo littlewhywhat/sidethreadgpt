@@ -77,8 +77,9 @@ const PinButton = ({ available }: PinButtonProps) => {
     }
   };
 
+  const UNAVAILABLE_MSG = "Not available\nin branches or when logged out";
   const tooltipTitle = !available
-    ? "Not available"
+    ? UNAVAILABLE_MSG
     : pinned
       ? "Unpin message"
       : "Pin message";
@@ -88,10 +89,15 @@ const PinButton = ({ available }: PinButtonProps) => {
       ref={ref}
       type="button"
       class="text-token-text-secondary hover:bg-token-bg-secondary rounded-lg"
-      aria-label={tooltipTitle}
+      aria-label={tooltipTitle.replace("\n", " ")}
       style={available ? undefined : { opacity: 0.4, cursor: "not-allowed" }}
       onMouseEnter={() => {
-        if (ref.current) tooltip.show(ref.current, tooltipTitle);
+        if (ref.current)
+          tooltip.show(
+            ref.current,
+            !available ? "Not available" : tooltipTitle,
+            !available ? ["in branches or when logged out"] : undefined,
+          );
       }}
       onMouseLeave={() => tooltip.hide()}
       onClick={handleClick}
