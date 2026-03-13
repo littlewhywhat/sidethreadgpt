@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "preact/hooks";
+import { INITIAL_PINS_VISIBLE } from "../../../types/messages";
 import {
   getPins,
   onPinsChange,
@@ -6,8 +7,6 @@ import {
   requestUnpin,
   updatePinPreview,
 } from "../../storage";
-
-const VISIBLE_LIMIT = 5;
 
 type PinItemProps = {
   pin: Pin;
@@ -246,8 +245,8 @@ const PinsSection = () => {
 
   if (pins.length === 0) return null;
 
-  const visible = expanded ? pins : pins.slice(0, VISIBLE_LIMIT);
-  const hasMore = pins.length > VISIBLE_LIMIT;
+  const visible = expanded ? pins : pins.slice(0, INITIAL_PINS_VISIBLE);
+  const hasMore = pins.length > INITIAL_PINS_VISIBLE;
 
   return (
     <div class="group/sidebar-expando-section mb-[var(--sidebar-expanded-section-margin-bottom)]">
@@ -291,7 +290,16 @@ const PinsSection = () => {
           type="button"
           class="group __menu-item hoverable gap-1.5 w-full"
           data-sidebar-item="true"
-          onClick={() => setExpanded((e) => !e)}
+          onClick={(e) => {
+            setExpanded((prev) => !prev);
+            const btn = e.currentTarget as HTMLElement;
+            btn.blur();
+            btn.style.pointerEvents = "none";
+            requestAnimationFrame(() => {
+              btn.style.pointerEvents = "";
+            });
+          }}
+          onMouseLeave={(e) => (e.currentTarget as HTMLElement).blur()}
         >
           <div class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon">
             <svg

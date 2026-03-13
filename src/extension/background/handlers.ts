@@ -1,8 +1,7 @@
-import type { Pin } from "../../types/messages";
+import { MAX_PINS, type Pin } from "../../types/messages";
 import { onBackgroundMessage, sendToTab } from "../shared/messaging";
 
 const STORAGE_KEY = "sidethreadgpt-pins";
-const MAX_PINS = 1000;
 
 const readPins = async (): Promise<Pin[]> => {
   const result = await chrome.storage.sync.get(STORAGE_KEY);

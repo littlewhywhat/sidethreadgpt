@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "preact/hooks";
+import { MAX_PINS } from "../../../types/messages";
 import { getConversationIdFromUrl } from "../../../utils/chatgpt";
 import { addPin, onPinsChange, type Pin, requestUnpin } from "../../storage";
 import * as tooltip from "../tooltip";
@@ -31,9 +32,11 @@ const extractPreview = (btn: HTMLElement): string => {
 const PinButton = ({ available }: PinButtonProps) => {
   const ref = useRef<HTMLButtonElement>(null);
   const [pinned, setPinned] = useState(false);
+  const [pinCount, setPinCount] = useState(0);
 
   useEffect(() => {
     const update = (pins: Pin[]) => {
+      setPinCount(pins.length);
       if (!available) return;
       const el = ref.current;
       if (!el) return;
@@ -51,9 +54,11 @@ const PinButton = ({ available }: PinButtonProps) => {
     return onPinsChange(update);
   }, [available]);
 
+  const atLimit = available && !pinned && pinCount >= MAX_PINS;
+
   const handleClick = (e: MouseEvent) => {
     e.stopPropagation();
-    if (!available) return;
+    if (!available || atLimit) return;
     const el = ref.current;
     if (!el) return;
     const conversationId = getConversationIdFromUrl();
@@ -78,11 +83,17 @@ const PinButton = ({ available }: PinButtonProps) => {
   };
 
   const UNAVAILABLE_MSG = "Not available\nin branches or when logged out";
+  const LIMIT_MSG = "Not available";
+  const LIMIT_SUB = "Upgrade to able to pin more";
   const tooltipTitle = !available
     ? UNAVAILABLE_MSG
-    : pinned
-      ? "Unpin message"
-      : "Pin message";
+    : atLimit
+      ? LIMIT_MSG
+      : pinned
+        ? "Unpin message"
+        : "Pin message";
+
+  const disabled = !available || atLimit;
 
   return (
     <button
@@ -90,17 +101,22 @@ const PinButton = ({ available }: PinButtonProps) => {
       type="button"
       class="text-token-text-secondary hover:bg-token-bg-secondary rounded-lg"
       aria-label={tooltipTitle.replace("\n", " ")}
-      style={available ? undefined : { opacity: 0.4, cursor: "not-allowed" }}
+      style={disabled ? { opacity: 0.4, cursor: "not-allowed" } : undefined}
       onMouseEnter={() => {
         if (ref.current)
           tooltip.show(
             ref.current,
-            !available ? "Not available" : tooltipTitle,
-            !available ? ["in branches or when logged out"] : undefined,
+            !available ? "Not available" : atLimit ? LIMIT_MSG : tooltipTitle,
+            !available
+              ? ["in branches or when logged out"]
+              : atLimit
+                ? [LIMIT_SUB]
+                : undefined,
           );
       }}
       onMouseLeave={() => tooltip.hide()}
       onClick={handleClick}
+      disabled={disabled}
     >
       <span class="flex items-center justify-center touch:w-10 h-8 w-8">
         <svg

@@ -1,9 +1,14 @@
+const MAX_PINS = 5;
+const INITIAL_PINS_VISIBLE = 3;
+
 type Pin = {
   conversationId: string;
   messageId: string;
   preview: string;
   pinnedAt: number;
 };
+
+export { MAX_PINS, INITIAL_PINS_VISIBLE };
 
 type BackgroundMessages = {
   "pins-get": {
