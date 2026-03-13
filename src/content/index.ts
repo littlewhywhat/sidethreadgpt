@@ -4,6 +4,7 @@ import {
   getLastAssistantMessageId,
   isBranchingAvailable,
 } from "./conversation";
+import { UnpinModalHost } from "./floating/components/UnpinModalHost";
 import { BranchButton } from "./inline/components/BranchButton";
 import { PinButton } from "./inline/components/PinButton";
 import { mountInline } from "./inline/mount";
@@ -77,6 +78,10 @@ observeAndInject({
 });
 
 injectPinsSection();
+
+const modalContainer = document.createElement("div");
+document.body.appendChild(modalContainer);
+mountInline(modalContainer, h(UnpinModalHost, null));
 
 document.addEventListener("click", () => {
   if (getIsSidebarVisible()) hideSidebar();

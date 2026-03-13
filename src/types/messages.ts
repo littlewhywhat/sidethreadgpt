@@ -26,6 +26,17 @@ type BackgroundMessages = {
     };
     response: undefined;
   };
+  "request-show-unpin-modal": {
+    request: Pin;
+    response: undefined;
+  };
 };
 
-export type { Pin, BackgroundMessages };
+type ContentMessages = {
+  "show-unpin-modal": {
+    request: Pin;
+    response: undefined;
+  };
+};
+
+export type { Pin, BackgroundMessages, ContentMessages };
