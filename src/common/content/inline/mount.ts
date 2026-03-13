@@ -1,9 +1,8 @@
 import { render, type VNode } from "preact";
 
-const mountInline = (
+const mountInline = <P>(
   container: Element,
-  // biome-ignore lint/suspicious/noExplicitAny: VNode type parameter is contravariant
-  vnode: VNode<any>,
+  vnode: VNode<P>,
 ): { dispose: () => void } => {
   render(vnode, container);
   return {
