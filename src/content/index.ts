@@ -1,4 +1,5 @@
 import { h } from "preact";
+import { mountInline } from "../common/content/inline/mount";
 import {
   getConversationIdFromUrl,
   getLastAssistantMessageId,
@@ -12,7 +13,6 @@ import {
 } from "./floating/sidebar";
 import { initBranchChatButtons } from "./inline/inject-branch-button";
 import { initPinButtons } from "./inline/inject-pin-button";
-import { mountInline } from "../common/content/inline/mount";
 import { injectPinsSection } from "./sidebar/inject-pins-section";
 
 initBranchChatButtons();
