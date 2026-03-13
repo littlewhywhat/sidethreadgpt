@@ -1,0 +1,3476 @@
+<nav
+  class="group/scrollport relative flex h-full w-full flex-1 flex-col overflow-y-auto transition-opacity motion-safe:duration-500"
+  aria-label="Chat history"
+  data-scrolled-from-end=""
+>
+  <div
+    class="sticky top-0 z-30 bg-(--sidebar-mask-bg,var(--bg-elevated-secondary))"
+  >
+    <div class="touch:px-1.5 px-2">
+      <div
+        id="sidebar-header"
+        class="h-header-height flex items-center justify-between"
+      >
+        <a
+          data-sidebar-item="true"
+          aria-label="Home"
+          class="text-token-text-primary no-draggable hover:bg-token-surface-hover keyboard-focused:bg-token-surface-hover touch:h-10 touch:w-10 flex h-9 w-9 items-center justify-center rounded-lg focus:outline-none disabled:opacity-50"
+          href="/"
+          data-discover="true"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            aria-hidden="true"
+            class="icon-lg"
+          >
+            <use
+              href="/cdn/assets/sprites-core-fk4oovux.svg#55180d"
+              fill="currentColor"
+            ></use>
+          </svg>
+        </a>
+        <div class="flex">
+          <button
+            class="text-token-text-tertiary no-draggable hover:bg-token-surface-hover keyboard-focused:bg-token-surface-hover touch:h-10 touch:w-10 flex h-9 w-9 items-center justify-center rounded-lg focus:outline-none disabled:opacity-50 no-draggable cursor-w-resize rtl:cursor-e-resize"
+            aria-expanded="true"
+            aria-controls="stage-slideover-sidebar"
+            aria-label="Close sidebar"
+            data-testid="close-sidebar-button"
+            data-state="closed"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              aria-hidden="true"
+              data-rtl-flip=""
+              class="icon max-md:hidden"
+            >
+              <use
+                href="/cdn/assets/sprites-core-fk4oovux.svg#836f7a"
+                fill="currentColor"
+              ></use></svg
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              aria-hidden="true"
+              class="icon md:hidden"
+            >
+              <use
+                href="/cdn/assets/sprites-core-fk4oovux.svg#85f94b"
+                fill="currentColor"
+              ></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="relative h-0">
+    <div
+      aria-hidden="true"
+      data-edge="true"
+      class="pointer-events-none h-px w-px absolute top-0"
+      style=""
+    ></div>
+    <div
+      aria-hidden="true"
+      data-edge="true"
+      class="pointer-events-none h-px w-px absolute top-0"
+      style="display: none !important"
+    ></div>
+  </div>
+  <aside
+    class="pt-(--sidebar-section-first-margin-top) last:mb-5 tall:sticky tall:top-header-height tall:z-20 not-tall:relative bg-(--sidebar-mask-bg,var(--bg-elevated-secondary)) [--sticky-spacer:6px]"
+  >
+    <a
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable"
+      data-testid="create-new-chat-button"
+      data-sidebar-item="true"
+      href="/"
+      data-discover="true"
+      ><div class="flex min-w-0 items-center gap-1.5">
+        <div
+          class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            aria-hidden="true"
+            class="icon"
+          >
+            <use
+              href="/cdn/assets/sprites-core-fk4oovux.svg#3a5c87"
+              fill="currentColor"
+            ></use>
+          </svg>
+        </div>
+        <div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">New chat</div>
+        </div>
+      </div>
+      <div class="trailing highlight text-token-text-tertiary">
+        <div
+          class="inline-flex whitespace-pre *:inline-flex *:font-sans touch:hidden"
+        >
+          <kbd aria-label="Shift"><span class="min-w-[1em]">⇧</span></kbd
+          ><kbd aria-label="Command"><span class="min-w-[1em]">⌘</span></kbd
+          ><kbd><span class="min-w-[1em]">O</span></kbd>
+        </div>
+      </div></a
+    >
+    <div
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable"
+      data-sidebar-item="true"
+    >
+      <div class="flex min-w-0 items-center gap-1.5">
+        <div
+          class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            aria-hidden="true"
+            class="icon"
+          >
+            <use
+              href="/cdn/assets/sprites-core-fk4oovux.svg#ac6d36"
+              fill="currentColor"
+            ></use>
+          </svg>
+        </div>
+        <div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">Search chats</div>
+        </div>
+      </div>
+      <div class="trailing highlight text-token-text-tertiary">
+        <div
+          class="inline-flex whitespace-pre *:inline-flex *:font-sans touch:hidden"
+        >
+          <kbd aria-label="Command"><span class="min-w-[1em]">⌘</span></kbd
+          ><kbd><span class="min-w-[1em]">K</span></kbd>
+        </div>
+      </div>
+    </div>
+    <a
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable gap-1.5"
+      data-testid="sidebar-item-library"
+      data-sidebar-item="true"
+      href="/images"
+      data-discover="true"
+      ><div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#266724"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      <div class="flex min-w-0 grow items-center gap-2.5">
+        <div class="truncate">Images</div>
+      </div></a
+    >
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute start-0 end-0 -bottom-(--sticky-spacer) h-(--sticky-spacer) tall:[box-shadow:var(--sharp-edge-top-shadow-placeholder)] tall:group-data-scrolled-from-top/scrollport:[box-shadow:var(--sharp-edge-top-shadow)] opacity-0 will-change-[opacity] group-data-scrolled-from-top/scrollport:opacity-100 bg-(--sidebar-mask-bg,var(--bg-elevated-secondary))"
+    ></div>
+  </aside>
+  <div
+    class="pb-[calc(var(--sidebar-section-margin-top)-var(--sidebar-section-first-margin-top))]"
+  >
+    <a
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable gap-1.5"
+      data-testid="apps-button"
+      data-sidebar-item="true"
+      href="/apps"
+      data-discover="true"
+      ><div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#c8839f"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      <div class="flex min-w-0 grow items-center gap-2.5">
+        <div class="truncate">Apps</div>
+      </div></a
+    ><a
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable gap-1.5"
+      data-testid="deep-research-sidebar-item"
+      data-sidebar-item="true"
+      href="/deep-research"
+      data-discover="true"
+      ><div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#5e6658"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      <div class="flex min-w-0 grow items-center gap-2.5">
+        <div class="truncate">Deep research</div>
+      </div></a
+    ><a
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable"
+      data-sidebar-item="true"
+      rel="noopener noreferrer"
+      href="/codex"
+      target="_blank"
+      data-discover="true"
+      ><div class="flex min-w-0 items-center gap-1.5">
+        <div
+          class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            aria-hidden="true"
+            class="icon"
+          >
+            <use
+              href="/cdn/assets/sprites-core-fk4oovux.svg#b995b8"
+              fill="currentColor"
+            ></use>
+          </svg>
+        </div>
+        <div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">Codex</div>
+        </div>
+      </div>
+      <div class="trailing highlight text-token-text-tertiary">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          aria-hidden="true"
+          data-rtl-flip=""
+          class="icon-sm"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#e51fba"
+            fill="currentColor"
+          ></use>
+        </svg></div
+    ></a>
+  </div>
+  <div
+    class="group/sidebar-expando-section mb-[var(--sidebar-expanded-section-margin-bottom)]"
+  >
+    <button
+      aria-expanded="true"
+      class="text-token-text-tertiary flex w-full items-center justify-start gap-0.5 px-4 py-1.5"
+    >
+      <h2 class="__menu-label" data-no-spacing="true">GPTs</h2>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        aria-hidden="true"
+        class="invisible h-3 w-3 shrink-0 group-hover/sidebar-expando-section:visible"
+      >
+        <use
+          href="/cdn/assets/sprites-core-fk4oovux.svg#ba3792"
+          fill="currentColor"
+        ></use>
+      </svg></button
+    ><a
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable"
+      data-sidebar-item="true"
+      href="/g/g-68ceabf30da881919866415011c8f65e-brainstormer"
+      data-discover="true"
+      ><div class="flex min-w-0 items-center gap-1.5">
+        <div
+          class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            class="icon"
+            aria-label=""
+          >
+            <use
+              href="/cdn/assets/sprites-core-fk4oovux.svg#b6a09f"
+              fill="currentColor"
+            ></use>
+          </svg>
+        </div>
+        <div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">brainstormer</div>
+        </div>
+      </div>
+      <div class="trailing highlight text-token-text-tertiary">
+        <button
+          tabindex="0"
+          data-trailing-button=""
+          class="__menu-item-trailing-btn"
+          type="button"
+          id="radix-_r_g3_"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          data-state="closed"
+        >
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              aria-hidden="true"
+              class="icon"
+            >
+              <use
+                href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                fill="currentColor"
+              ></use>
+            </svg>
+          </div>
+        </button></div></a
+    ><a
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable"
+      data-sidebar-item="true"
+      href="/g/g-JKsDIcaBe-tax-advisor-czechia-danovy-poradce"
+      data-discover="true"
+      ><div class="flex min-w-0 items-center gap-1.5">
+        <div
+          class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+        >
+          <div class="overflow-hidden rounded-full icon">
+            <img
+              class="bg-token-tertiary h-full w-full"
+              alt=""
+              width="80"
+              height="80"
+              src="https://chatgpt.com/backend-api/estuary/content?id=file-kM1GU9OMOr6NaVByqcm8m9Uj&amp;gizmo_id=g-JKsDIcaBe&amp;ts=492597&amp;p=gpp&amp;cid=1&amp;sig=6c5cbd6f575c74dfcd2da83a761def90cb1a1931a3482d12449f96ca2586dac4&amp;v=0"
+            />
+          </div>
+        </div>
+        <div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate" title="Tax Advisor - Czechia (Daňový Poradce)">
+            Tax Advisor - Czechia (Daňový Poradce)
+          </div>
+        </div>
+      </div>
+      <div class="trailing highlight text-token-text-tertiary">
+        <button
+          tabindex="0"
+          data-trailing-button=""
+          class="__menu-item-trailing-btn"
+          type="button"
+          id="radix-_r_g5_"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          data-state="closed"
+        >
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              aria-hidden="true"
+              class="icon"
+            >
+              <use
+                href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                fill="currentColor"
+              ></use>
+            </svg>
+          </div>
+        </button></div></a
+    ><a
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable"
+      data-sidebar-item="true"
+      href="/g/g-SbmouT4ID-stock-price-fair-value-calculator"
+      data-discover="true"
+      ><div class="flex min-w-0 items-center gap-1.5">
+        <div
+          class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+        >
+          <div class="overflow-hidden rounded-full icon">
+            <img
+              class="bg-token-tertiary h-full w-full"
+              alt=""
+              width="80"
+              height="80"
+              src="https://chatgpt.com/backend-api/estuary/content?id=file-vraDBPaborBt94QYRRRhVVTv&amp;gizmo_id=g-SbmouT4ID&amp;ts=492597&amp;p=gpp&amp;cid=1&amp;sig=e060b3cfcf74ae131c0423259fa552ebed331ff86c2bac186df1a9b27f2f68e9&amp;v=0"
+            />
+          </div>
+        </div>
+        <div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate" title="Stock Price Fair Value Calculator">
+            Stock Price Fair Value Calculator
+          </div>
+        </div>
+      </div>
+      <div class="trailing highlight text-token-text-tertiary">
+        <button
+          tabindex="0"
+          data-trailing-button=""
+          class="__menu-item-trailing-btn"
+          type="button"
+          id="radix-_r_g7_"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          data-state="closed"
+        >
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              aria-hidden="true"
+              class="icon"
+            >
+              <use
+                href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                fill="currentColor"
+              ></use>
+            </svg>
+          </div>
+        </button></div></a
+    ><a
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable"
+      data-sidebar-item="true"
+      href="/g/g-sMiOXZ6gC-stock-price-prediction"
+      data-discover="true"
+      ><div class="flex min-w-0 items-center gap-1.5">
+        <div
+          class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+        >
+          <div class="overflow-hidden rounded-full icon">
+            <img
+              class="bg-token-tertiary h-full w-full"
+              alt=""
+              width="80"
+              height="80"
+              src="https://chatgpt.com/backend-api/estuary/content?id=file-HJjUgi2WszVoqj5bPAu4SY&amp;gizmo_id=g-sMiOXZ6gC&amp;ts=492597&amp;p=gpp&amp;cid=1&amp;sig=a060a5d6ca09b9f785c5be3514a7112d1ef6c58f7a2df8901e8c21de25519655&amp;v=0"
+            />
+          </div>
+        </div>
+        <div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">Stock Price Prediction</div>
+        </div>
+      </div>
+      <div class="trailing highlight text-token-text-tertiary">
+        <button
+          tabindex="0"
+          data-trailing-button=""
+          class="__menu-item-trailing-btn"
+          type="button"
+          id="radix-_r_g9_"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          data-state="closed"
+        >
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              aria-hidden="true"
+              class="icon"
+            >
+              <use
+                href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                fill="currentColor"
+              ></use>
+            </svg>
+          </div>
+        </button></div></a
+    ><a
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable gap-1.5"
+      data-testid="explore-gpts-button"
+      data-sidebar-item="true"
+      href="/gpts"
+      data-discover="true"
+      ><div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#b6a09f"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      <div class="flex min-w-0 grow items-center gap-2.5">
+        <div class="truncate">Explore GPTs</div>
+      </div></a
+    >
+  </div>
+  <!-- Projects -->
+  <div
+    class="group/sidebar-expando-section mb-[var(--sidebar-expanded-section-margin-bottom)]"
+  >
+    <button
+      aria-expanded="true"
+      class="text-token-text-tertiary flex w-full items-center justify-start gap-0.5 px-4 py-1.5"
+    >
+      <h2 class="__menu-label" data-no-spacing="true">Projects</h2>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        aria-hidden="true"
+        class="invisible h-3 w-3 shrink-0 group-hover/sidebar-expando-section:visible"
+      >
+        <use
+          href="/cdn/assets/sprites-core-fk4oovux.svg#ba3792"
+          fill="currentColor"
+        ></use>
+      </svg></button
+    ><button
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable gap-1.5 w-full"
+      data-sidebar-item="true"
+      type="button"
+    >
+      <div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#608c49"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      <div class="flex min-w-0 grow items-center gap-2.5">
+        <div class="truncate">New project</div>
+      </div></button
+    ><a
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable"
+      data-sidebar-item="true"
+      href="/g/g-p-688542eaab108191b33a03837b67766b-pet-projects/project"
+      data-discover="true"
+      ><div class="flex min-w-0 items-center gap-1.5">
+        <div
+          class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+        >
+          <button class="icon" data-state="closed">
+            <div
+              class="[&amp;_path]:stroke-current text-token-text-primary"
+              style="width: 20px; height: 20px"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  viewBox="0 0 20 20"
+                  width="20"
+                  height="20"
+                  preserveAspectRatio="xMidYMid meet"
+                  style="
+                    width: 100%;
+                    height: 100%;
+                    transform: translate3d(0px, 0px, 0px);
+                    content-visibility: visible;
+                  "
+                >
+                  <defs>
+                    <clipPath id="__lottie_element_34">
+                      <rect width="20" height="20" x="0" y="0"></rect>
+                    </clipPath>
+                  </defs>
+                  <g clip-path="url(#__lottie_element_34)">
+                    <g
+                      transform="matrix(1,0,0,1,0,0)"
+                      opacity="1"
+                      style="display: block"
+                    >
+                      <g opacity="1" transform="matrix(1,0,0,1,2.75,3.5)">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="miter"
+                          fill-opacity="0"
+                          stroke-miterlimit="4"
+                          stroke="rgb(0,0,0)"
+                          stroke-opacity="1"
+                          stroke-width="1.33"
+                          d=" M14.5,6 C14.5,5.808333396911621 14.5,5.616666793823242 14.5,5.425000190734863 C14.5,4.094880104064941 14.5,3.429810047149658 14.241100311279297,2.9217700958251953 C14.013400077819824,2.4748899936676025 13.650099754333496,2.111560106277466 13.203200340270996,1.8838599920272827 C12.695199966430664,1.625 12.030099868774414,1.625 10.699999809265137,1.625 C9.931366920471191,1.625 9.16273307800293,1.625 8.394100189208984,1.625 C8.242400169372559,1.625 8.166600227355957,1.625 8.093500137329102,1.6204999685287476 C7.561999797821045,1.5877100229263306 7.056839942932129,1.377210021018982 6.6593098640441895,1.0228099822998047 C6.604680061340332,0.974120020866394 6.551270008087158,0.9202499985694885 6.444439888000488,0.8125 C6.444439888000488,0.8125 6.444439888000488,0.8125 6.444439888000488,0.8125 C6.337619781494141,0.7047500014305115 6.284210205078125,0.650879979133606 6.229579925537109,0.6021900177001953 C5.83204984664917,0.24778999388217926 5.326930046081543,0.037289999425411224 4.795370101928711,0.0044999998062849045 C4.722330093383789,0 4.646470069885254,0 4.494740009307861,0 C4.263160228729248,0 4.031579971313477,0 3.799999952316284,0 C2.4698801040649414,0 1.8048100471496582,0 1.2967699766159058,0.2588599920272827 C0.8498899936676025,0.48655998706817627 0.48655998706817627,0.8498899936676025 0.2588599920272827,1.2967699766159058 C0,1.8048100471496582 0,2.469870090484619 0,3.799999952316284 C0,5.599999904632568 0,7.400000095367432 0,9.199999809265137 C0,10.530099868774414 0,11.195199966430664 0.2588599920272827,11.703200340270996 C0.48655998706817627,12.150099754333496 0.8498899936676025,12.513400077819824 1.2967699766159058,12.741100311279297 C1.8048100471496582,13 2.4698801040649414,13 3.799999952316284,13 C4.616666793823242,13 5.433333396911621,13 6.25,13"
+                        ></path>
+                      </g>
+                    </g>
+                    <g
+                      transform="matrix(1,0,0,1,0,0)"
+                      opacity="1"
+                      style="display: block"
+                    >
+                      <g
+                        opacity="1"
+                        transform="matrix(1,0,0,1,2.75,8.913877487182617)"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="miter"
+                          fill-opacity="0"
+                          stroke-miterlimit="4"
+                          stroke="rgb(0,0,0)"
+                          stroke-opacity="1"
+                          stroke-width="1.33"
+                          d=" M0.5920000076293945,0 C0.38477998971939087,0 0.2811700105667114,0 0.20202000439167023,0.03922419250011444 C0.1324000060558319,0.07372163981199265 0.07580000162124634,0.12877944111824036 0.04033000022172928,0.19649054110050201 C0,0.27346059679985046 0,0.37422969937324524 0,0.5757679343223572 C0,1.6806167364120483 0,2.7854654788970947 0,3.8903141021728516 C0,5.183944225311279 0,5.830807685852051 0.2588599920272827,6.324878692626953 C0.48655998706817627,6.759525299072266 0.8498899936676025,7.112961292266846 1.2967699766159058,7.334417819976807 C1.8048100471496582,7.586122035980225 2.4698801040649414,7.586122035980225 3.799999952316284,7.586122035980225 C6.099999904632568,7.586122035980225 8.399999618530273,7.586122035980225 10.699999809265137,7.586122035980225 C12.030099868774414,7.586122035980225 12.695199966430664,7.586122035980225 13.203200340270996,7.334417819976807 C13.650099754333496,7.112961292266846 14.013400077819824,6.759525299072266 14.241100311279297,6.324878692626953 C14.5,5.830807685852051 14.5,5.183944225311279 14.5,3.8903141021728516 C14.5,2.7854654788970947 14.5,1.6806167364120483 14.5,0.5757679343223572 C14.5,0.37422969937324524 14.5,0.27346059679985046 14.459699630737305,0.19649054110050201 C14.424200057983398,0.12877944111824036 14.367600440979004,0.07372163981199265 14.29800033569336,0.03922419250011444 C14.218799591064453,0 14.11520004272461,0 13.907999992370605,0 C9.46933364868164,0 5.030666828155518,0 0.5920000076293945,0 C0.5920000076293945,0 0.5920000076293945,0 0.5920000076293945,0 C0.5920000076293945,0 0.5920000076293945,0 0.5920000076293945,0z"
+                        ></path>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </button>
+        </div>
+        <div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">pet projects</div>
+        </div>
+      </div>
+      <div class="trailing highlight text-token-text-tertiary">
+        <button
+          tabindex="0"
+          data-trailing-button=""
+          class="__menu-item-trailing-btn"
+          type="button"
+          id="radix-_r_gc_"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          data-state="closed"
+        >
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              aria-hidden="true"
+              class="icon"
+            >
+              <use
+                href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                fill="currentColor"
+              ></use>
+            </svg>
+          </div>
+        </button></div></a
+    ><a
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable"
+      data-sidebar-item="true"
+      href="/g/g-p-683872e1e3548191a56d02eb365d7c8b-job/project"
+      data-discover="true"
+      ><div class="flex min-w-0 items-center gap-1.5">
+        <div
+          class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+        >
+          <button class="icon" data-state="closed">
+            <div
+              class="[&amp;_path]:stroke-current text-token-text-primary"
+              style="width: 20px; height: 20px"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  viewBox="0 0 20 20"
+                  width="20"
+                  height="20"
+                  preserveAspectRatio="xMidYMid meet"
+                  style="
+                    width: 100%;
+                    height: 100%;
+                    transform: translate3d(0px, 0px, 0px);
+                    content-visibility: visible;
+                  "
+                >
+                  <defs>
+                    <clipPath id="__lottie_element_42">
+                      <rect width="20" height="20" x="0" y="0"></rect>
+                    </clipPath>
+                  </defs>
+                  <g clip-path="url(#__lottie_element_42)">
+                    <g
+                      transform="matrix(1,0,0,1,0,0)"
+                      opacity="1"
+                      style="display: block"
+                    >
+                      <g opacity="1" transform="matrix(1,0,0,1,2.75,3.5)">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="miter"
+                          fill-opacity="0"
+                          stroke-miterlimit="4"
+                          stroke="rgb(0,0,0)"
+                          stroke-opacity="1"
+                          stroke-width="1.33"
+                          d=" M14.5,6 C14.5,5.808333396911621 14.5,5.616666793823242 14.5,5.425000190734863 C14.5,4.094880104064941 14.5,3.429810047149658 14.241100311279297,2.9217700958251953 C14.013400077819824,2.4748899936676025 13.650099754333496,2.111560106277466 13.203200340270996,1.8838599920272827 C12.695199966430664,1.625 12.030099868774414,1.625 10.699999809265137,1.625 C9.931366920471191,1.625 9.16273307800293,1.625 8.394100189208984,1.625 C8.242400169372559,1.625 8.166600227355957,1.625 8.093500137329102,1.6204999685287476 C7.561999797821045,1.5877100229263306 7.056839942932129,1.377210021018982 6.6593098640441895,1.0228099822998047 C6.604680061340332,0.974120020866394 6.551270008087158,0.9202499985694885 6.444439888000488,0.8125 C6.444439888000488,0.8125 6.444439888000488,0.8125 6.444439888000488,0.8125 C6.337619781494141,0.7047500014305115 6.284210205078125,0.650879979133606 6.229579925537109,0.6021900177001953 C5.83204984664917,0.24778999388217926 5.326930046081543,0.037289999425411224 4.795370101928711,0.0044999998062849045 C4.722330093383789,0 4.646470069885254,0 4.494740009307861,0 C4.263160228729248,0 4.031579971313477,0 3.799999952316284,0 C2.4698801040649414,0 1.8048100471496582,0 1.2967699766159058,0.2588599920272827 C0.8498899936676025,0.48655998706817627 0.48655998706817627,0.8498899936676025 0.2588599920272827,1.2967699766159058 C0,1.8048100471496582 0,2.469870090484619 0,3.799999952316284 C0,5.599999904632568 0,7.400000095367432 0,9.199999809265137 C0,10.530099868774414 0,11.195199966430664 0.2588599920272827,11.703200340270996 C0.48655998706817627,12.150099754333496 0.8498899936676025,12.513400077819824 1.2967699766159058,12.741100311279297 C1.8048100471496582,13 2.4698801040649414,13 3.799999952316284,13 C4.616666793823242,13 5.433333396911621,13 6.25,13"
+                        ></path>
+                      </g>
+                    </g>
+                    <g
+                      transform="matrix(1,0,0,1,0,0)"
+                      opacity="1"
+                      style="display: block"
+                    >
+                      <g
+                        opacity="1"
+                        transform="matrix(1,0,0,1,2.75,8.913877487182617)"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="miter"
+                          fill-opacity="0"
+                          stroke-miterlimit="4"
+                          stroke="rgb(0,0,0)"
+                          stroke-opacity="1"
+                          stroke-width="1.33"
+                          d=" M0.5920000076293945,0 C0.38477998971939087,0 0.2811700105667114,0 0.20202000439167023,0.03922419250011444 C0.1324000060558319,0.07372163981199265 0.07580000162124634,0.12877944111824036 0.04033000022172928,0.19649054110050201 C0,0.27346059679985046 0,0.37422969937324524 0,0.5757679343223572 C0,1.6806167364120483 0,2.7854654788970947 0,3.8903141021728516 C0,5.183944225311279 0,5.830807685852051 0.2588599920272827,6.324878692626953 C0.48655998706817627,6.759525299072266 0.8498899936676025,7.112961292266846 1.2967699766159058,7.334417819976807 C1.8048100471496582,7.586122035980225 2.4698801040649414,7.586122035980225 3.799999952316284,7.586122035980225 C6.099999904632568,7.586122035980225 8.399999618530273,7.586122035980225 10.699999809265137,7.586122035980225 C12.030099868774414,7.586122035980225 12.695199966430664,7.586122035980225 13.203200340270996,7.334417819976807 C13.650099754333496,7.112961292266846 14.013400077819824,6.759525299072266 14.241100311279297,6.324878692626953 C14.5,5.830807685852051 14.5,5.183944225311279 14.5,3.8903141021728516 C14.5,2.7854654788970947 14.5,1.6806167364120483 14.5,0.5757679343223572 C14.5,0.37422969937324524 14.5,0.27346059679985046 14.459699630737305,0.19649054110050201 C14.424200057983398,0.12877944111824036 14.367600440979004,0.07372163981199265 14.29800033569336,0.03922419250011444 C14.218799591064453,0 14.11520004272461,0 13.907999992370605,0 C9.46933364868164,0 5.030666828155518,0 0.5920000076293945,0 C0.5920000076293945,0 0.5920000076293945,0 0.5920000076293945,0 C0.5920000076293945,0 0.5920000076293945,0 0.5920000076293945,0z"
+                        ></path>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </button>
+        </div>
+        <div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">Job</div>
+        </div>
+      </div>
+      <div class="trailing highlight text-token-text-tertiary">
+        <button
+          tabindex="0"
+          data-trailing-button=""
+          class="__menu-item-trailing-btn"
+          type="button"
+          id="radix-_r_gf_"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          data-state="closed"
+        >
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              aria-hidden="true"
+              class="icon"
+            >
+              <use
+                href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                fill="currentColor"
+              ></use>
+            </svg>
+          </div>
+        </button></div></a
+    ><a
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable"
+      data-sidebar-item="true"
+      href="/g/g-p-68f14d8b6ca881918f95584ff1184db9-linkedin-posts/project"
+      data-discover="true"
+      ><div class="flex min-w-0 items-center gap-1.5">
+        <div
+          class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+        >
+          <button class="icon" data-state="closed">
+            <div class="" style="color: rgb(146, 79, 247)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                aria-label="Writing"
+                class="icon"
+              >
+                <use
+                  href="/cdn/assets/sprites-core-fk4oovux.svg#13c505"
+                  fill="currentColor"
+                ></use>
+              </svg>
+            </div>
+          </button>
+        </div>
+        <div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">LinkedIn posts</div>
+        </div>
+      </div>
+      <div class="trailing highlight text-token-text-tertiary">
+        <button
+          tabindex="0"
+          data-trailing-button=""
+          class="__menu-item-trailing-btn"
+          type="button"
+          id="radix-_r_gi_"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          data-state="closed"
+        >
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              aria-hidden="true"
+              class="icon"
+            >
+              <use
+                href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                fill="currentColor"
+              ></use>
+            </svg>
+          </div>
+        </button></div></a
+    ><a
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable"
+      data-sidebar-item="true"
+      href="/g/g-p-69179b2ebebc8191b9bd76f457aba04c-videos/project"
+      data-discover="true"
+      ><div class="flex min-w-0 items-center gap-1.5">
+        <div
+          class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+        >
+          <button class="icon" data-state="closed">
+            <div
+              class="[&amp;_path]:stroke-current text-token-text-primary"
+              style="width: 20px; height: 20px"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  viewBox="0 0 20 20"
+                  width="20"
+                  height="20"
+                  preserveAspectRatio="xMidYMid meet"
+                  style="
+                    width: 100%;
+                    height: 100%;
+                    transform: translate3d(0px, 0px, 0px);
+                    content-visibility: visible;
+                  "
+                >
+                  <defs>
+                    <clipPath id="__lottie_element_50">
+                      <rect width="20" height="20" x="0" y="0"></rect>
+                    </clipPath>
+                  </defs>
+                  <g clip-path="url(#__lottie_element_50)">
+                    <g
+                      transform="matrix(1,0,0,1,0,0)"
+                      opacity="1"
+                      style="display: block"
+                    >
+                      <g opacity="1" transform="matrix(1,0,0,1,2.75,3.5)">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="miter"
+                          fill-opacity="0"
+                          stroke-miterlimit="4"
+                          stroke="rgb(0,0,0)"
+                          stroke-opacity="1"
+                          stroke-width="1.33"
+                          d=" M14.5,6 C14.5,5.808333396911621 14.5,5.616666793823242 14.5,5.425000190734863 C14.5,4.094880104064941 14.5,3.429810047149658 14.241100311279297,2.9217700958251953 C14.013400077819824,2.4748899936676025 13.650099754333496,2.111560106277466 13.203200340270996,1.8838599920272827 C12.695199966430664,1.625 12.030099868774414,1.625 10.699999809265137,1.625 C9.931366920471191,1.625 9.16273307800293,1.625 8.394100189208984,1.625 C8.242400169372559,1.625 8.166600227355957,1.625 8.093500137329102,1.6204999685287476 C7.561999797821045,1.5877100229263306 7.056839942932129,1.377210021018982 6.6593098640441895,1.0228099822998047 C6.604680061340332,0.974120020866394 6.551270008087158,0.9202499985694885 6.444439888000488,0.8125 C6.444439888000488,0.8125 6.444439888000488,0.8125 6.444439888000488,0.8125 C6.337619781494141,0.7047500014305115 6.284210205078125,0.650879979133606 6.229579925537109,0.6021900177001953 C5.83204984664917,0.24778999388217926 5.326930046081543,0.037289999425411224 4.795370101928711,0.0044999998062849045 C4.722330093383789,0 4.646470069885254,0 4.494740009307861,0 C4.263160228729248,0 4.031579971313477,0 3.799999952316284,0 C2.4698801040649414,0 1.8048100471496582,0 1.2967699766159058,0.2588599920272827 C0.8498899936676025,0.48655998706817627 0.48655998706817627,0.8498899936676025 0.2588599920272827,1.2967699766159058 C0,1.8048100471496582 0,2.469870090484619 0,3.799999952316284 C0,5.599999904632568 0,7.400000095367432 0,9.199999809265137 C0,10.530099868774414 0,11.195199966430664 0.2588599920272827,11.703200340270996 C0.48655998706817627,12.150099754333496 0.8498899936676025,12.513400077819824 1.2967699766159058,12.741100311279297 C1.8048100471496582,13 2.4698801040649414,13 3.799999952316284,13 C4.616666793823242,13 5.433333396911621,13 6.25,13"
+                        ></path>
+                      </g>
+                    </g>
+                    <g
+                      transform="matrix(1,0,0,1,0,0)"
+                      opacity="1"
+                      style="display: block"
+                    >
+                      <g
+                        opacity="1"
+                        transform="matrix(1,0,0,1,2.75,8.913877487182617)"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="miter"
+                          fill-opacity="0"
+                          stroke-miterlimit="4"
+                          stroke="rgb(0,0,0)"
+                          stroke-opacity="1"
+                          stroke-width="1.33"
+                          d=" M0.5920000076293945,0 C0.38477998971939087,0 0.2811700105667114,0 0.20202000439167023,0.03922419250011444 C0.1324000060558319,0.07372163981199265 0.07580000162124634,0.12877944111824036 0.04033000022172928,0.19649054110050201 C0,0.27346059679985046 0,0.37422969937324524 0,0.5757679343223572 C0,1.6806167364120483 0,2.7854654788970947 0,3.8903141021728516 C0,5.183944225311279 0,5.830807685852051 0.2588599920272827,6.324878692626953 C0.48655998706817627,6.759525299072266 0.8498899936676025,7.112961292266846 1.2967699766159058,7.334417819976807 C1.8048100471496582,7.586122035980225 2.4698801040649414,7.586122035980225 3.799999952316284,7.586122035980225 C6.099999904632568,7.586122035980225 8.399999618530273,7.586122035980225 10.699999809265137,7.586122035980225 C12.030099868774414,7.586122035980225 12.695199966430664,7.586122035980225 13.203200340270996,7.334417819976807 C13.650099754333496,7.112961292266846 14.013400077819824,6.759525299072266 14.241100311279297,6.324878692626953 C14.5,5.830807685852051 14.5,5.183944225311279 14.5,3.8903141021728516 C14.5,2.7854654788970947 14.5,1.6806167364120483 14.5,0.5757679343223572 C14.5,0.37422969937324524 14.5,0.27346059679985046 14.459699630737305,0.19649054110050201 C14.424200057983398,0.12877944111824036 14.367600440979004,0.07372163981199265 14.29800033569336,0.03922419250011444 C14.218799591064453,0 14.11520004272461,0 13.907999992370605,0 C9.46933364868164,0 5.030666828155518,0 0.5920000076293945,0 C0.5920000076293945,0 0.5920000076293945,0 0.5920000076293945,0 C0.5920000076293945,0 0.5920000076293945,0 0.5920000076293945,0z"
+                        ></path>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </button>
+        </div>
+        <div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">Videos</div>
+        </div>
+      </div>
+      <div class="trailing highlight text-token-text-tertiary">
+        <button
+          tabindex="0"
+          data-trailing-button=""
+          class="__menu-item-trailing-btn"
+          type="button"
+          id="radix-_r_gl_"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          data-state="closed"
+        >
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              aria-hidden="true"
+              class="icon"
+            >
+              <use
+                href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                fill="currentColor"
+              ></use>
+            </svg>
+          </div>
+        </button></div></a
+    ><a
+      tabindex="0"
+      data-fill=""
+      class="group __menu-item hoverable"
+      data-sidebar-item="true"
+      href="/g/g-p-68ea32eab27481919157a08b06c61d58-event-app/project"
+      data-discover="true"
+      ><div class="flex min-w-0 items-center gap-1.5">
+        <div
+          class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+        >
+          <button class="icon" data-state="closed">
+            <div
+              class="[&amp;_path]:stroke-current text-token-text-primary"
+              style="width: 20px; height: 20px"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  viewBox="0 0 20 20"
+                  width="20"
+                  height="20"
+                  preserveAspectRatio="xMidYMid meet"
+                  style="
+                    width: 100%;
+                    height: 100%;
+                    transform: translate3d(0px, 0px, 0px);
+                    content-visibility: visible;
+                  "
+                >
+                  <defs>
+                    <clipPath id="__lottie_element_58">
+                      <rect width="20" height="20" x="0" y="0"></rect>
+                    </clipPath>
+                  </defs>
+                  <g clip-path="url(#__lottie_element_58)">
+                    <g
+                      transform="matrix(1,0,0,1,0,0)"
+                      opacity="1"
+                      style="display: block"
+                    >
+                      <g opacity="1" transform="matrix(1,0,0,1,2.75,3.5)">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="miter"
+                          fill-opacity="0"
+                          stroke-miterlimit="4"
+                          stroke="rgb(0,0,0)"
+                          stroke-opacity="1"
+                          stroke-width="1.33"
+                          d=" M14.5,6 C14.5,5.808333396911621 14.5,5.616666793823242 14.5,5.425000190734863 C14.5,4.094880104064941 14.5,3.429810047149658 14.241100311279297,2.9217700958251953 C14.013400077819824,2.4748899936676025 13.650099754333496,2.111560106277466 13.203200340270996,1.8838599920272827 C12.695199966430664,1.625 12.030099868774414,1.625 10.699999809265137,1.625 C9.931366920471191,1.625 9.16273307800293,1.625 8.394100189208984,1.625 C8.242400169372559,1.625 8.166600227355957,1.625 8.093500137329102,1.6204999685287476 C7.561999797821045,1.5877100229263306 7.056839942932129,1.377210021018982 6.6593098640441895,1.0228099822998047 C6.604680061340332,0.974120020866394 6.551270008087158,0.9202499985694885 6.444439888000488,0.8125 C6.444439888000488,0.8125 6.444439888000488,0.8125 6.444439888000488,0.8125 C6.337619781494141,0.7047500014305115 6.284210205078125,0.650879979133606 6.229579925537109,0.6021900177001953 C5.83204984664917,0.24778999388217926 5.326930046081543,0.037289999425411224 4.795370101928711,0.0044999998062849045 C4.722330093383789,0 4.646470069885254,0 4.494740009307861,0 C4.263160228729248,0 4.031579971313477,0 3.799999952316284,0 C2.4698801040649414,0 1.8048100471496582,0 1.2967699766159058,0.2588599920272827 C0.8498899936676025,0.48655998706817627 0.48655998706817627,0.8498899936676025 0.2588599920272827,1.2967699766159058 C0,1.8048100471496582 0,2.469870090484619 0,3.799999952316284 C0,5.599999904632568 0,7.400000095367432 0,9.199999809265137 C0,10.530099868774414 0,11.195199966430664 0.2588599920272827,11.703200340270996 C0.48655998706817627,12.150099754333496 0.8498899936676025,12.513400077819824 1.2967699766159058,12.741100311279297 C1.8048100471496582,13 2.4698801040649414,13 3.799999952316284,13 C4.616666793823242,13 5.433333396911621,13 6.25,13"
+                        ></path>
+                      </g>
+                    </g>
+                    <g
+                      transform="matrix(1,0,0,1,0,0)"
+                      opacity="1"
+                      style="display: block"
+                    >
+                      <g
+                        opacity="1"
+                        transform="matrix(1,0,0,1,2.75,8.913877487182617)"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="miter"
+                          fill-opacity="0"
+                          stroke-miterlimit="4"
+                          stroke="rgb(0,0,0)"
+                          stroke-opacity="1"
+                          stroke-width="1.33"
+                          d=" M0.5920000076293945,0 C0.38477998971939087,0 0.2811700105667114,0 0.20202000439167023,0.03922419250011444 C0.1324000060558319,0.07372163981199265 0.07580000162124634,0.12877944111824036 0.04033000022172928,0.19649054110050201 C0,0.27346059679985046 0,0.37422969937324524 0,0.5757679343223572 C0,1.6806167364120483 0,2.7854654788970947 0,3.8903141021728516 C0,5.183944225311279 0,5.830807685852051 0.2588599920272827,6.324878692626953 C0.48655998706817627,6.759525299072266 0.8498899936676025,7.112961292266846 1.2967699766159058,7.334417819976807 C1.8048100471496582,7.586122035980225 2.4698801040649414,7.586122035980225 3.799999952316284,7.586122035980225 C6.099999904632568,7.586122035980225 8.399999618530273,7.586122035980225 10.699999809265137,7.586122035980225 C12.030099868774414,7.586122035980225 12.695199966430664,7.586122035980225 13.203200340270996,7.334417819976807 C13.650099754333496,7.112961292266846 14.013400077819824,6.759525299072266 14.241100311279297,6.324878692626953 C14.5,5.830807685852051 14.5,5.183944225311279 14.5,3.8903141021728516 C14.5,2.7854654788970947 14.5,1.6806167364120483 14.5,0.5757679343223572 C14.5,0.37422969937324524 14.5,0.27346059679985046 14.459699630737305,0.19649054110050201 C14.424200057983398,0.12877944111824036 14.367600440979004,0.07372163981199265 14.29800033569336,0.03922419250011444 C14.218799591064453,0 14.11520004272461,0 13.907999992370605,0 C9.46933364868164,0 5.030666828155518,0 0.5920000076293945,0 C0.5920000076293945,0 0.5920000076293945,0 0.5920000076293945,0 C0.5920000076293945,0 0.5920000076293945,0 0.5920000076293945,0z"
+                        ></path>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </button>
+        </div>
+        <div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">event app</div>
+        </div>
+      </div>
+      <div class="trailing highlight text-token-text-tertiary">
+        <button
+          tabindex="0"
+          data-trailing-button=""
+          class="__menu-item-trailing-btn"
+          type="button"
+          id="radix-_r_go_"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          data-state="closed"
+        >
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              aria-hidden="true"
+              class="icon"
+            >
+              <use
+                href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                fill="currentColor"
+              ></use>
+            </svg>
+          </div>
+        </button></div
+    ></a>
+    <div
+      tabindex="0"
+      class="group __menu-item hoverable gap-1.5"
+      data-sidebar-item="true"
+      type="button"
+      id="radix-_r_gq_"
+      aria-haspopup="menu"
+      aria-expanded="false"
+      data-state="closed"
+    >
+      <div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      <div class="flex min-w-0 grow items-center gap-2.5">
+        <div class="truncate">More</div>
+      </div>
+    </div>
+  </div>
+  <!-- YOUR CHATS -->
+  <div
+    class="group/sidebar-expando-section mb-[var(--sidebar-expanded-section-margin-bottom)]"
+  >
+    <button
+      aria-expanded="true"
+      class="text-token-text-tertiary flex w-full items-center justify-start gap-0.5 px-4 py-1.5"
+    >
+      <h2 class="__menu-label" data-no-spacing="true">Your chats</h2>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        aria-hidden="true"
+        class="invisible h-3 w-3 shrink-0 group-hover/sidebar-expando-section:visible"
+      >
+        <use
+          href="/cdn/assets/sprites-core-fk4oovux.svg#ba3792"
+          fill="currentColor"
+        ></use>
+      </svg>
+    </button>
+    <div id="history" class="">
+      <a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="false"
+        data-sidebar-item="true"
+        href="/c/697f0efa-7f34-838d-b85e-175523cd5a0b"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Low-FODMAP Diet Explained</span
+            ><span class="sr-only">Pinned</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="undefined-options"
+              data-conversation-options-trigger="697f0efa-7f34-838d-b85e-175523cd5a0b"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_gs_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div class="trailing text-token-text-tertiary" tabindex="-1">
+            <span aria-hidden="true"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                aria-hidden="true"
+                class="icon-xs text-token-icon-tertiary opacity-50"
+              >
+                <use
+                  href="/cdn/assets/sprites-core-fk4oovux.svg#a8c6bd"
+                  fill="currentColor"
+                ></use>
+              </svg>
+            </span>
+          </div></div></a
+      ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="false"
+        data-sidebar-item="true"
+        href="/c/698dd9ce-b82c-8394-9d61-fecffe5853df"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Install Chrome 143</span
+            ><span class="sr-only">Pinned</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="undefined-options"
+              data-conversation-options-trigger="698dd9ce-b82c-8394-9d61-fecffe5853df"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_gu_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div class="trailing text-token-text-tertiary" tabindex="-1">
+            <span aria-hidden="true"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                aria-hidden="true"
+                class="icon-xs text-token-icon-tertiary opacity-50"
+              >
+                <use
+                  href="/cdn/assets/sprites-core-fk4oovux.svg#a8c6bd"
+                  fill="currentColor"
+                ></use></svg
+            ></span>
+          </div></div></a
+      ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="false"
+        data-sidebar-item="true"
+        href="/c/6992319a-1414-838f-aef0-c559ae98c2b2"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Best Probability Courses</span
+            ><span class="sr-only">Pinned</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="undefined-options"
+              data-conversation-options-trigger="6992319a-1414-838f-aef0-c559ae98c2b2"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_h0_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div class="trailing text-token-text-tertiary" tabindex="-1">
+            <span aria-hidden="true"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                aria-hidden="true"
+                class="icon-xs text-token-icon-tertiary opacity-50"
+              >
+                <use
+                  href="/cdn/assets/sprites-core-fk4oovux.svg#a8c6bd"
+                  fill="currentColor"
+                ></use></svg
+            ></span>
+          </div></div></a
+      ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69b13fea-872c-8392-8b3b-1dedf42428d6"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Mortgage Refinance Discussion</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-0-options"
+              data-conversation-options-trigger="69b13fea-872c-8392-8b3b-1dedf42428d6"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_h2_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a
+      ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69b07161-4920-8396-be3d-ed61024dfa44"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate" title="Kubernetes Cost Savings Tracking">
+            <span class="" dir="auto">Kubernetes Cost Savings Tracking</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-1-options"
+              data-conversation-options-trigger="69b07161-4920-8396-be3d-ed61024dfa44"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_h4_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a
+      ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69b11d48-7318-838c-b243-62d48825e1e5"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Entrance meaning clarification</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-2-options"
+              data-conversation-options-trigger="69b11d48-7318-838c-b243-62d48825e1e5"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_h6_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a
+      ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69aee6c9-abc8-8394-99c2-47459ecbaa66"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Check AWS EFS contents</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-3-options"
+              data-conversation-options-trigger="69aee6c9-abc8-8394-99c2-47459ecbaa66"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_h8_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a
+      ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69af4a00-1108-8396-9b1f-69e7f695bdb7"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate" title="Branch · Check AWS EFS contents">
+            <span class="" dir="auto">Branch · Check AWS EFS contents</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-4-options"
+              data-conversation-options-trigger="69af4a00-1108-8396-9b1f-69e7f695bdb7"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_ha_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a
+      ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69af3f20-bb3c-8392-a4f8-08dcbd78882f"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div
+            class="truncate"
+            title="Branch · Branch · Check AWS EFS contents"
+          >
+            <span class="" dir="auto"
+              >Branch · Branch · Check AWS EFS contents</span
+            >
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-5-options"
+              data-conversation-options-trigger="69af3f20-bb3c-8392-a4f8-08dcbd78882f"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_hc_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a
+      ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69af36a5-ae34-838e-86af-ad6416a76273"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate" title="Branch · Check AWS EFS contents">
+            <span class="" dir="auto">Branch · Check AWS EFS contents</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-6-options"
+              data-conversation-options-trigger="69af36a5-ae34-838e-86af-ad6416a76273"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_he_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a
+      ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69af35a2-a758-8390-9f82-8848c678bb0d"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate" title="Branch · Check AWS EFS contents">
+            <span class="" dir="auto">Branch · Check AWS EFS contents</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-7-options"
+              data-conversation-options-trigger="69af35a2-a758-8390-9f82-8848c678bb0d"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_hg_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a
+      ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69adefb5-a438-838e-96f1-0a24867a4681"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate" title="Garmin screen metrics explained">
+            <span class="" dir="auto">Garmin screen metrics explained</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-8-options"
+              data-conversation-options-trigger="69adefb5-a438-838e-96f1-0a24867a4681"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_hi_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a
+      ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69ae9b8a-1158-838e-876a-0242e8b16ad2"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">S3 Select JSON Query</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-9-options"
+              data-conversation-options-trigger="69ae9b8a-1158-838e-876a-0242e8b16ad2"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_hk_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a
+      ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69ade6a0-447c-8389-ab60-67c3ad6b21d2"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">ВЧП на Garmin</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-10-options"
+              data-conversation-options-trigger="69ade6a0-447c-8389-ab60-67c3ad6b21d2"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_hm_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69ac2263-b480-8391-8001-7d35e52fa981"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Compound Formulas Setup</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-11-options"
+              data-conversation-options-trigger="69ac2263-b480-8391-8001-7d35e52fa981"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_ho_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="false"
+        data-sidebar-item="true"
+        href="/g/g-JKsDIcaBe-tax-advisor-czechia-danovy-poradce/c/6991b747-634c-838e-a5ca-9bd9ca75a6a7"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Oddíl C DPH Guidance</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-12-options"
+              data-conversation-options-trigger="6991b747-634c-838e-a5ca-9bd9ca75a6a7"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_hq_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69ac5ac9-7a44-8388-bcac-24beb3aea1d7"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Билец на сербском</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-13-options"
+              data-conversation-options-trigger="69ac5ac9-7a44-8388-bcac-24beb3aea1d7"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_hs_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69ac07cc-ff88-8391-9f11-9156e5e278b8"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Personal Finance System</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-14-options"
+              data-conversation-options-trigger="69ac07cc-ff88-8391-9f11-9156e5e278b8"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_hu_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69aa7a24-c11c-8387-b47e-1d3319fbeed7"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">No Passport Stamp Explanation</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-15-options"
+              data-conversation-options-trigger="69aa7a24-c11c-8387-b47e-1d3319fbeed7"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_i0_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69a97f8d-dd24-8385-8849-ecb7af13af45"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Sequences in Postgres DB</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-16-options"
+              data-conversation-options-trigger="69a97f8d-dd24-8385-8849-ecb7af13af45"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_i2_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69a96d73-88ac-838f-be4e-8d4d5eac43de"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">OpenAI profitability status</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-17-options"
+              data-conversation-options-trigger="69a96d73-88ac-838f-be4e-8d4d5eac43de"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_i4_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69a870d9-5db8-8397-bef3-61a5614e7300"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate" title="Garmin Forerunner 165 Features">
+            <span class="" dir="auto">Garmin Forerunner 165 Features</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-18-options"
+              data-conversation-options-trigger="69a870d9-5db8-8397-bef3-61a5614e7300"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_i6_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69a83d34-cfb4-8393-a9b4-35378a9f6adf"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Ranking Formula for Styles</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-19-options"
+              data-conversation-options-trigger="69a83d34-cfb4-8393-a9b4-35378a9f6adf"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_i8_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a>
+          <a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69a80fe0-5ab4-8395-8d37-9e2183f1a9a2"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">DBeaver reconnect settings</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-20-options"
+              data-conversation-options-trigger="69a80fe0-5ab4-8395-8d37-9e2183f1a9a2"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_ia_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69a7d9d8-fd10-8385-9764-b6bf9d64101d"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Bitcoin Value Drivers</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-21-options"
+              data-conversation-options-trigger="69a7d9d8-fd10-8385-9764-b6bf9d64101d"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_ic_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69a70767-4314-838a-9809-2b80dcca0913"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Kubernetes logs with Stern</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-22-options"
+              data-conversation-options-trigger="69a70767-4314-838a-9809-2b80dcca0913"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_ie_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69a4a364-f8e4-8395-996a-5b2179b91ad5"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Cold exposure and congestion</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-23-options"
+              data-conversation-options-trigger="69a4a364-f8e4-8395-996a-5b2179b91ad5"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_ig_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69a36833-e9ac-8394-8342-28648117587d"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Design System Overview</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-24-options"
+              data-conversation-options-trigger="69a36833-e9ac-8394-8342-28648117587d"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_ii_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a
+      ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69a4559e-aa30-838a-be2f-be0ba85eec4b"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Hash Collisions and Emails</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-25-options"
+              data-conversation-options-trigger="69a4559e-aa30-838a-be2f-be0ba85eec4b"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_ik_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a
+      ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69a43571-9a90-8396-80d4-869b83c56a00"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Dock Chrome for Testing</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-26-options"
+              data-conversation-options-trigger="69a43571-9a90-8396-80d4-869b83c56a00"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_im_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div></a
+      ><a
+        tabindex="0"
+        data-fill=""
+        class="group __menu-item hoverable"
+        draggable="true"
+        data-sidebar-item="true"
+        href="/c/69a37774-3e08-838d-bf22-f69b849d818a"
+        data-discover="true"
+        ><div class="flex min-w-0 grow items-center gap-2.5">
+          <div class="truncate">
+            <span class="" dir="auto">Request for Help</span>
+          </div>
+        </div>
+        <div class="trailing-pair">
+          <div class="trailing highlight text-token-text-tertiary">
+            <button
+              tabindex="0"
+              data-trailing-button=""
+              class="__menu-item-trailing-btn"
+              data-testid="history-item-27-options"
+              data-conversation-options-trigger="69a37774-3e08-838d-bf22-f69b849d818a"
+              aria-label="Open conversation options"
+              type="button"
+              id="radix-_r_io_"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="icon"
+                >
+                  <use
+                    href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+                    fill="currentColor"
+                  ></use>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div
+            class="trailing text-token-text-tertiary"
+            tabindex="-1"
+          ></div></div
+      ></a>
+    </div>
+  </div>
+  <div class="grow"></div>
+  <div
+    aria-hidden="true"
+    data-edge="true"
+    class="pointer-events-none h-px w-px"
+  ></div>
+  <div
+    class="align-end pointer-events-none sticky z-40 flex shrink-0 flex-col justify-end"
+    style="
+      bottom: calc(-2px + 3.95rem);
+      margin-top: calc(-4px);
+      height: calc(4px);
+      mask-image: linear-gradient(to top, transparent 25%, white 75%);
+    "
+  >
+    <div
+      class="sticky w-full bg-token-border-sharp"
+      style="bottom: calc(1px + 3.95rem); height: 1px"
+    ></div>
+  </div>
+  <div
+    class="sticky bottom-0 z-30 py-1.5 empty:hidden bg-token-bg-elevated-secondary"
+  >
+    <div class="relative">
+      <div
+        tabindex="0"
+        data-fill=""
+        data-size="large"
+        class="group __menu-item hoverable gap-2"
+        data-testid="accounts-profile-button"
+        aria-label="Roman Vaivod, open profile menu"
+        role="button"
+        type="button"
+        id="radix-_r_iq_"
+        aria-haspopup="menu"
+        aria-expanded="false"
+        data-state="closed"
+        data-sidebar-item="true"
+      >
+        <div
+          class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon-lg"
+        >
+          <div
+            class="flex overflow-hidden rounded-full select-none bg-gray-500/30 h-6 w-6 shrink-0"
+          >
+            <img
+              alt="Profile image"
+              class="h-6 w-6 shrink-0 object-cover"
+              referrerpolicy="no-referrer"
+              src="https://cdn.auth0.com/avatars/li.png"
+            />
+          </div>
+        </div>
+        <div class="min-w-0">
+          <div class="flex min-w-0 grow items-center gap-2.5">
+            <div class="truncate">Roman Vaivod</div>
+          </div>
+          <div
+            class="not-group-data-disabled:text-token-text-tertiary leading-dense mb-0.5 text-xs group-data-sheet-item:mt-0.5 group-data-sheet-item:mb-0"
+          >
+            <span
+              class="inline-flex items-center gap-1 truncate text-xs font-normal text-token-text-tertiary"
+              dir="auto"
+              ><span>Free</span></span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="m-4 mt-2">
+        <button
+          aria-label="Claim offer"
+          class="btn border-token-interactive-border-secondary-default bg-token-bg-primary hover:bg-token-interactive-bg-secondary-hover h-9 w-full gap-0.5 px-4 text-xs leading-5 font-medium"
+        >
+          <span aria-hidden="true"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              aria-hidden="true"
+              class="icon-sm"
+            >
+              <use
+                href="/cdn/assets/sprites-core-fk4oovux.svg#699e94"
+                fill="currentColor"
+              ></use></svg></span>Claim offer
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- conversation options -->
+<div
+  data-radix-popper-content-wrapper=""
+  dir="ltr"
+  style="
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    transform: translate(208px, 781px);
+    min-width: max-content;
+    --radix-popper-transform-origin: 0% 273px;
+    z-index: 50;
+    --radix-popper-available-width: 627px;
+    --radix-popper-available-height: 1048px;
+    --radix-popper-anchor-width: 38px;
+    --radix-popper-anchor-height: 39px;
+  "
+>
+  <div
+    data-side="top"
+    data-align="start"
+    role="menu"
+    aria-orientation="vertical"
+    data-state="open"
+    data-radix-menu-content=""
+    dir="ltr"
+    id="radix-_r_og_"
+    aria-labelledby="radix-_r_of_"
+    class="z-50 max-w-xs rounded-2xl popover bg-token-main-surface-primary dark:bg-[#353535] shadow-long py-1.5 data-[unbound-width]:min-w-[unset] data-[custom-padding]:py-0 [--trigger-width:calc(var(--radix-dropdown-menu-trigger-width)-2*var(--radix-align-offset))] min-w-(--trigger-width) max-h-[var(--radix-dropdown-menu-content-available-height)] overflow-y-auto select-none"
+    tabindex="-1"
+    data-orientation="vertical"
+    style="
+      outline: none;
+      --radix-align-offset: -8px;
+      --radix-dropdown-menu-content-transform-origin: var(
+        --radix-popper-transform-origin
+      );
+      --radix-dropdown-menu-content-available-width: var(
+        --radix-popper-available-width
+      );
+      --radix-dropdown-menu-content-available-height: var(
+        --radix-popper-available-height
+      );
+      --radix-dropdown-menu-trigger-width: var(--radix-popper-anchor-width);
+      --radix-dropdown-menu-trigger-height: var(--radix-popper-anchor-height);
+    "
+  >
+    <div
+      role="menuitem"
+      tabindex="0"
+      class="group __menu-item gap-1.5"
+      data-testid="share-chat-menu-item"
+      data-orientation="vertical"
+      data-radix-collection-item=""
+    >
+      <div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#630ca2"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      Share
+    </div>
+    <div
+      role="menuitem"
+      tabindex="0"
+      class="group __menu-item gap-1.5"
+      data-orientation="vertical"
+      data-radix-collection-item=""
+    >
+      <div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#427dd9"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      Start a group chat
+    </div>
+    <div
+      role="menuitem"
+      tabindex="0"
+      class="group __menu-item gap-1.5"
+      data-orientation="vertical"
+      data-radix-collection-item=""
+    >
+      <div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#6d87e1"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      Rename
+    </div>
+    <div
+      role="menuitem"
+      id="radix-_r_2e8_"
+      aria-haspopup="menu"
+      aria-expanded="false"
+      aria-controls="radix-_r_2e7_"
+      data-state="closed"
+      tabindex="0"
+      data-has-submenu=""
+      class="group __menu-item"
+      data-orientation="vertical"
+      data-radix-collection-item=""
+    >
+      <div class="flex min-w-0 items-center gap-1.5">
+        <div
+          class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            aria-hidden="true"
+            class="icon"
+          >
+            <use
+              href="/cdn/assets/sprites-core-fk4oovux.svg#61ee0c"
+              fill="currentColor"
+            ></use>
+          </svg>
+        </div>
+        <div class="flex min-w-0 grow items-center gap-2.5">
+          Move to project
+        </div>
+      </div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        aria-hidden="true"
+        data-rtl-flip=""
+        class="icon-sm -me-0.25"
+      >
+        <use
+          href="/cdn/assets/sprites-core-fk4oovux.svg#d3876b"
+          fill="currentColor"
+        ></use>
+      </svg>
+    </div>
+    <div
+      role="separator"
+      aria-orientation="horizontal"
+      class="bg-token-border-default h-px mx-4 my-1 first:hidden last:hidden"
+    ></div>
+    <div
+      role="menuitem"
+      tabindex="0"
+      class="group __menu-item gap-1.5"
+      data-orientation="vertical"
+      data-radix-collection-item=""
+    >
+      <div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#23d2ff"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      Pin chat
+    </div>
+    <div
+      role="menuitem"
+      tabindex="0"
+      class="group __menu-item gap-1.5"
+      data-orientation="vertical"
+      data-radix-collection-item=""
+    >
+      <div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#f7f872"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      Archive
+    </div>
+    <div
+      role="menuitem"
+      tabindex="0"
+      data-color="danger"
+      class="group __menu-item gap-1.5"
+      data-testid="delete-chat-menu-item"
+      data-orientation="vertical"
+      data-radix-collection-item=""
+    >
+      <div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#3ee541"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      Delete
+    </div>
+    <div
+      role="separator"
+      aria-orientation="horizontal"
+      class="bg-token-border-default h-px mx-4 my-1 first:hidden last:hidden"
+    ></div>
+  </div>
+</div>
+
+<!-- when input activated -->
+<a
+  tabindex="0"
+  data-active=""
+  data-fill=""
+  class="group __menu-item hoverable"
+  draggable="false"
+  data-sidebar-item="true"
+  href="/c/698dd9ce-b82c-8394-9d61-fecffe5853df"
+  data-discover="true"
+  ><div class="flex min-w-0 grow items-center gap-2.5">
+    <input
+      class="w-full border-none bg-transparent p-0 text-sm focus:ring-0"
+      type="text"
+      value="Install Chrome 143"
+      name="title-editor"
+    />
+  </div>
+  <div class="trailing text-token-text-tertiary"></div
+></a>
+
+<!-- when input deactivated -->
+<a
+  tabindex="0"
+  data-active=""
+  data-fill=""
+  class="group __menu-item hoverable"
+  draggable="false"
+  data-sidebar-item="true"
+  href="/c/698dd9ce-b82c-8394-9d61-fecffe5853df"
+  data-discover="true"
+  ><div class="flex min-w-0 grow items-center gap-2.5">
+    <div class="truncate">
+      <span class="" dir="auto">Install Chrome 143</span
+      ><span class="sr-only">Pinned</span>
+    </div>
+  </div>
+  <div class="trailing-pair">
+    <div class="trailing highlight text-token-text-tertiary">
+      <button
+        tabindex="0"
+        data-trailing-button=""
+        class="__menu-item-trailing-btn"
+        data-testid="undefined-options"
+        data-conversation-options-trigger="698dd9ce-b82c-8394-9d61-fecffe5853df"
+        aria-label="Open conversation options"
+        type="button"
+        id="radix-_r_ou_"
+        aria-haspopup="menu"
+        aria-expanded="false"
+        data-state="closed"
+      >
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            aria-hidden="true"
+            class="icon"
+          >
+            <use
+              href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+              fill="currentColor"
+            ></use>
+          </svg>
+        </div>
+      </button>
+    </div>
+    <div class="trailing text-token-text-tertiary" tabindex="-1">
+      <span aria-hidden="true"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon-xs text-token-icon-tertiary opacity-50"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#a8c6bd"
+            fill="currentColor"
+          ></use></svg></span>
+    </div></div
+></a>
+
+<!-- note trailing pair -->
+<div class="trailing-pair">
+  <div class="trailing highlight text-token-text-tertiary">
+    <button
+      tabindex="0"
+      data-trailing-button=""
+      class="__menu-item-trailing-btn"
+      data-testid="history-item-0-options"
+      data-conversation-options-trigger="69b13fea-872c-8392-8b3b-1dedf42428d6"
+      aria-label="Open conversation options"
+      type="button"
+      id="radix-_r_km_"
+      aria-haspopup="menu"
+      aria-expanded="false"
+      data-state="closed"
+    >
+      <div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#f6d0e2"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+    </button>
+  </div>
+  <div class="trailing text-token-text-tertiary" tabindex="-1"></div>
+</div>
+
+<div
+  data-radix-popper-content-wrapper=""
+  dir="ltr"
+  style="
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    transform: translate(208px, 891px);
+    min-width: max-content;
+    --radix-popper-transform-origin: 0% 0px;
+    z-index: 50;
+    --radix-popper-available-width: 627px;
+    --radix-popper-available-height: 375px;
+    --radix-popper-anchor-width: 38px;
+    --radix-popper-anchor-height: 39px;
+  "
+>
+  <div
+    data-side="bottom"
+    data-align="start"
+    role="menu"
+    aria-orientation="vertical"
+    data-state="open"
+    data-radix-menu-content=""
+    dir="ltr"
+    id="radix-_r_jk_"
+    aria-labelledby="radix-_r_jj_"
+    class="z-50 max-w-xs rounded-2xl popover bg-token-main-surface-primary dark:bg-[#353535] shadow-long py-1.5 data-[unbound-width]:min-w-[unset] data-[custom-padding]:py-0 [--trigger-width:calc(var(--radix-dropdown-menu-trigger-width)-2*var(--radix-align-offset))] min-w-(--trigger-width) max-h-[var(--radix-dropdown-menu-content-available-height)] overflow-y-auto select-none"
+    tabindex="-1"
+    data-orientation="vertical"
+    style="
+      outline: none;
+      --radix-align-offset: -8px;
+      --radix-dropdown-menu-content-transform-origin: var(
+        --radix-popper-transform-origin
+      );
+      --radix-dropdown-menu-content-available-width: var(
+        --radix-popper-available-width
+      );
+      --radix-dropdown-menu-content-available-height: var(
+        --radix-popper-available-height
+      );
+      --radix-dropdown-menu-trigger-width: var(--radix-popper-anchor-width);
+      --radix-dropdown-menu-trigger-height: var(--radix-popper-anchor-height);
+    "
+  >
+    <div
+      role="menuitem"
+      tabindex="0"
+      class="group __menu-item gap-1.5"
+      data-testid="share-chat-menu-item"
+      data-orientation="vertical"
+      data-radix-collection-item=""
+    >
+      <div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#630ca2"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      Share
+    </div>
+    <div
+      role="menuitem"
+      tabindex="0"
+      class="group __menu-item gap-1.5"
+      data-orientation="vertical"
+      data-radix-collection-item=""
+    >
+      <div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#427dd9"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      Start a group chat
+    </div>
+    <div
+      role="menuitem"
+      tabindex="0"
+      class="group __menu-item gap-1.5"
+      data-orientation="vertical"
+      data-radix-collection-item=""
+    >
+      <div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#6d87e1"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      Rename
+    </div>
+    <div
+      role="menuitem"
+      id="radix-_r_mu_"
+      aria-haspopup="menu"
+      aria-expanded="true"
+      aria-controls="radix-_r_mt_"
+      data-state="open"
+      tabindex="0"
+      data-has-submenu=""
+      class="group __menu-item"
+      data-orientation="vertical"
+      data-radix-collection-item=""
+    >
+      <div class="flex min-w-0 items-center gap-1.5">
+        <div
+          class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            aria-hidden="true"
+            class="icon"
+          >
+            <use
+              href="/cdn/assets/sprites-core-fk4oovux.svg#61ee0c"
+              fill="currentColor"
+            ></use>
+          </svg>
+        </div>
+        <div class="flex min-w-0 grow items-center gap-2.5">
+          Move to project
+        </div>
+      </div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        aria-hidden="true"
+        data-rtl-flip=""
+        class="icon-sm -me-0.25"
+      >
+        <use
+          href="/cdn/assets/sprites-core-fk4oovux.svg#d3876b"
+          fill="currentColor"
+        ></use>
+      </svg>
+    </div>
+    <div
+      role="separator"
+      aria-orientation="horizontal"
+      class="bg-token-border-default h-px mx-4 my-1 first:hidden last:hidden"
+    ></div>
+    <div
+      role="menuitem"
+      tabindex="0"
+      class="group __menu-item gap-1.5"
+      data-orientation="vertical"
+      data-radix-collection-item=""
+    >
+      <div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#23d2ff"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      Pin chat
+    </div>
+    <div
+      role="menuitem"
+      tabindex="0"
+      class="group __menu-item gap-1.5"
+      data-orientation="vertical"
+      data-radix-collection-item=""
+    >
+      <div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#f7f872"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      Archive
+    </div>
+    <div
+      role="menuitem"
+      tabindex="0"
+      data-color="danger"
+      class="group __menu-item gap-1.5"
+      data-testid="delete-chat-menu-item"
+      data-orientation="vertical"
+      data-radix-collection-item=""
+    >
+      <div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-fk4oovux.svg#3ee541"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      Delete
+    </div>
+    <div
+      role="separator"
+      aria-orientation="horizontal"
+      class="bg-token-border-default h-px mx-4 my-1 first:hidden last:hidden"
+    ></div>
+  </div>
+</div>
+
+<!-- confirmation dialog -->
+<div class="absolute inset-0" id="modal-delete-conversation-confirmation" data-testid="modal-delete-conversation-confirmation" data-ignore-for-page-load="true">
+  <div data-state="open" class="fixed inset-0 z-50 before:starting:backdrop-blur-0 before:absolute before:inset-0 before:bg-gray-200/50 before:backdrop-blur-[1px] not-motion-reduce:before:transition not-motion-reduce:before:duration-250 dark:before:bg-black/50 before:starting:opacity-0" style="pointer-events: auto;">
+    <div class="z-50 h-full w-full overflow-y-auto grid grid-cols-[10px_1fr_10px] grid-rows-[minmax(10px,1fr)_auto_minmax(10px,1fr)] md:grid-rows-[minmax(20px,0.8fr)_auto_minmax(20px,1fr)]">
+      <div role="dialog" id="radix-_r_141_" data-state="open" class="popover bg-token-bg-primary relative col-auto col-start-2 row-auto row-start-2 h-full w-full text-start start-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 rounded-2xl shadow-long flex flex-col focus:outline-hidden max-w-md overflow-hidden" tabindex="-1" style="pointer-events: auto;">
+        <header class="min-h-header-height flex justify-between p-2.5 ps-4 select-none">
+          <div class="flex max-w-full items-center">
+            <div class="flex max-w-full min-w-0 grow flex-col">
+              <h2 id="radix-_r_142_" class="text-token-text-primary text-lg font-normal">Delete chat?</h2
+            </div>
+          </div>
+          <div class="flex h-[max-content] items-center gap-2">
+
+          </div>
+        </header>
+      <div class="grow overflow-y-auto p-4 pt-1">This will delete <strong>Low-FODMAP Diet Explained</strong>.<div class="text-token-text-tertiary mt-2 text-sm">Visit <a class="underline" href="/c/69b44938-5e88-832d-8619-0e5f2b4e8e7b#settings/Personalization" data-discover="true">settings</a> to delete any memories saved during this chat.</div>
+      <div class="flex w-full flex-row items-center text-sm select-none justify-end">
+        <div class="flex-0"><div class="flex flex-col gap-3 sm:flex-row-reverse mt-5 sm:mt-4 flex w-full flex-row-reverse">
+          <button class="btn relative group-focus-within/dialog:focus-visible:[outline-width:1.5px] group-focus-within/dialog:focus-visible:[outline-offset:2.5px] group-focus-within/dialog:focus-visible:[outline-style:solid] group-focus-within/dialog:focus-visible:[outline-color:var(--text-primary)] btn-danger" data-testid="delete-conversation-confirm-button">
+            <div class="flex items-center justify-center">Delete</div>
+          </button>
+          <button class="btn relative group-focus-within/dialog:focus-visible:[outline-width:1.5px] group-focus-within/dialog:focus-visible:[outline-offset:2.5px] group-focus-within/dialog:focus-visible:[outline-style:solid] group-focus-within/dialog:focus-visible:[outline-color:var(--text-primary)] btn-secondary">
+            <div class="flex items-center justify-center">Cancel</div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- red menu option -->
+<div
+      role="menuitem"
+      tabindex="0"
+      data-color="danger"
+      class="group __menu-item gap-1.5"
+      data-testid="delete-chat-menu-item"
+      data-orientation="vertical"
+      data-radix-collection-item=""
+    >
+      <div
+        class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          class="icon"
+        >
+          <use
+            href="/cdn/assets/sprites-core-mlj80iqy.svg#3ee541"
+            fill="currentColor"
+          ></use>
+        </svg>
+      </div>
+      Delete
+</div>
+  

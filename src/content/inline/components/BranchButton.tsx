@@ -9,15 +9,16 @@ type BranchButtonProps = {
 const BranchButton = ({ available, onBranch }: BranchButtonProps) => {
   const ref = useRef<HTMLButtonElement>(null);
 
-  const tooltipTitle = available
-    ? "Branch conversation"
-    : "Not available in branches or when logged out";
-  const tooltipSubs = available ? ["Ctrl+Shift+B", "Esc to close"] : [];
+  const tooltipTitle = available ? "Branch conversation" : "Not available";
+  const tooltipSubs = available
+    ? ["Ctrl+Shift+B", "Esc to close"]
+    : ["in branches or when logged out"];
 
   const handleClick = (e: MouseEvent) => {
     e.stopPropagation();
     if (!available) return;
-    const btn = ref.current!;
+    const btn = ref.current;
+    if (!btn) return;
     const article = btn.closest("article");
     let messageId: string | undefined;
     if (article) {
@@ -42,7 +43,9 @@ const BranchButton = ({ available, onBranch }: BranchButtonProps) => {
       data-testid="bad-response-turn-action-button"
       data-state="closed"
       style={available ? undefined : { opacity: 0.4, cursor: "not-allowed" }}
-      onMouseEnter={() => tooltip.show(ref.current!, tooltipTitle, tooltipSubs)}
+      onMouseEnter={() => {
+        if (ref.current) tooltip.show(ref.current, tooltipTitle, tooltipSubs);
+      }}
       onMouseLeave={() => tooltip.hide()}
       onClick={handleClick}
     >

@@ -1,16 +1,27 @@
+import { h } from "preact";
+import { mountInline } from "../common/content/inline/mount";
 import {
   getConversationIdFromUrl,
   getLastAssistantMessageId,
   isBranchingAvailable,
 } from "../utils/chatgpt";
+import { UnpinModalHost } from "./floating/components/UnpinModalHost";
 import {
   getIsSidebarVisible,
   hideSidebar,
   showSidebar,
 } from "./floating/sidebar";
 import { initBranchChatButtons } from "./inline/inject-branch-button";
+import { initPinButtons } from "./inline/inject-pin-button";
+import { injectPinsSection } from "./sidebar/inject-pins-section";
 
 initBranchChatButtons();
+initPinButtons();
+injectPinsSection();
+
+const modalContainer = document.createElement("div");
+document.body.appendChild(modalContainer);
+mountInline(modalContainer, h(UnpinModalHost, null));
 
 document.addEventListener("click", () => {
   if (getIsSidebarVisible()) hideSidebar();
