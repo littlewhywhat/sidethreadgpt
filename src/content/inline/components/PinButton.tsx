@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import { getConversationIdFromUrl } from "../../../utils/chatgpt";
-import { addPin, onPinsChange, type Pin, removePin } from "../../storage";
+import { addPin, onPinsChange, type Pin, requestUnpin } from "../../storage";
 import * as tooltip from "../tooltip";
 
 type PinButtonProps = {
@@ -61,7 +61,12 @@ const PinButton = ({ available }: PinButtonProps) => {
     if (!conversationId || !messageId) return;
 
     if (pinned) {
-      removePin(conversationId, messageId);
+      requestUnpin({
+        conversationId,
+        messageId,
+        preview: extractPreview(el),
+        pinnedAt: 0,
+      });
     } else {
       addPin({
         conversationId,
@@ -98,10 +103,13 @@ const PinButton = ({ available }: PinButtonProps) => {
           height="20"
           aria-hidden="true"
           class="icon"
-          style={pinned ? { opacity: 1 } : { opacity: 0.7 }}
         >
           <use
-            href="/cdn/assets/sprites-core-fk4oovux.svg#23d2ff"
+            href={
+              pinned
+                ? "/cdn/assets/sprites-core-fk4oovux.svg#13322a"
+                : "/cdn/assets/sprites-core-fk4oovux.svg#23d2ff"
+            }
             fill="currentColor"
           />
         </svg>

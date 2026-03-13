@@ -1,4 +1,4 @@
-import type { BackgroundMessages } from "../../types/messages";
+import type { BackgroundMessages, ContentMessages } from "../../types/messages";
 
 const sendMessage = <K extends keyof BackgroundMessages>(
   type: K,
@@ -36,4 +36,11 @@ const onBackgroundMessage = <K extends keyof BackgroundMessages>(
   return () => chrome.runtime.onMessage.removeListener(listener);
 };
 
-export { sendMessage, onBackgroundMessage };
+const sendToTab = <K extends keyof ContentMessages>(
+  tabId: number,
+  type: K,
+  payload: ContentMessages[K]["request"],
+): Promise<ContentMessages[K]["response"]> =>
+  chrome.tabs.sendMessage(tabId, { type, payload });
+
+export { sendMessage, onBackgroundMessage, sendToTab };

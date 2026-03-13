@@ -63,6 +63,10 @@ const updatePinPreview = (
   });
 };
 
+const requestUnpin = (pin: Pin): void => {
+  sendMessage("request-show-unpin-modal", pin);
+};
+
 export {
   getPins,
   loadPins,
@@ -71,5 +75,6 @@ export {
   isPinned,
   onPinsChange,
   updatePinPreview,
+  requestUnpin,
 };
 export type { Pin };
