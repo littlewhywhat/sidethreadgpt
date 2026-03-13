@@ -9,7 +9,12 @@ import {
 
 const VISIBLE_LIMIT = 5;
 
-const PinItem = ({ pin }: { pin: Pin }) => {
+type PinItemProps = {
+  pin: Pin;
+  onUnpinClick: (pin: Pin) => void;
+};
+
+const PinItem = ({ pin, onUnpinClick }: PinItemProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPos, setMenuPos] = useState({ left: 0, top: 0 });
   const [renaming, setRenaming] = useState(false);
@@ -50,13 +55,6 @@ const PinItem = ({ pin }: { pin: Pin }) => {
       setMenuPos({ left: rect.left, top: rect.bottom + 4 });
     }
     setMenuOpen((v) => !v);
-  };
-
-  const handleUnpin = (e: MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setMenuOpen(false);
-    removePin(pin.conversationId, pin.messageId);
   };
 
   const handleStartRename = (e: MouseEvent) => {
@@ -200,10 +198,20 @@ const PinItem = ({ pin }: { pin: Pin }) => {
             <div
               role="menuitem"
               tabIndex={0}
+              data-color="danger"
               class="group __menu-item hoverable gap-1.5 w-full"
-              onClick={handleUnpin}
+              onClick={(e: MouseEvent) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setMenuOpen(false);
+                onUnpinClick(pin);
+              }}
               onKeyDown={(e: KeyboardEvent) => {
-                if (e.key === "Enter") handleUnpin(e as unknown as MouseEvent);
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  setMenuOpen(false);
+                  onUnpinClick(pin);
+                }
               }}
             >
               <div class="flex items-center justify-center group-disabled:opacity-50 group-data-disabled:opacity-50 icon">
@@ -216,6 +224,7 @@ const PinItem = ({ pin }: { pin: Pin }) => {
                 >
                   <use
                     href="/cdn/assets/sprites-core-fk4oovux.svg#13322a"
+                    // href="/cdn/assets/sprites-core-mlj80iqy.svg#3ee541"
                     fill="currentColor"
                   />
                 </svg>
@@ -233,10 +242,23 @@ const PinsSection = () => {
   const [pins, setPins] = useState<Pin[]>(getPins);
   const [expanded, setExpanded] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+  const [unpinConfirmTarget, setUnpinConfirmTarget] = useState<Pin | null>(
+    null,
+  );
 
   useEffect(() => onPinsChange(setPins), []);
 
-  if (pins.length === 0) return null;
+  const handleUnpinConfirm = useCallback(() => {
+    if (unpinConfirmTarget) {
+      removePin(
+        unpinConfirmTarget.conversationId,
+        unpinConfirmTarget.messageId,
+      );
+      setUnpinConfirmTarget(null);
+    }
+  }, [unpinConfirmTarget]);
+
+  if (pins.length === 0 && !unpinConfirmTarget) return null;
 
   const visible = expanded ? pins : pins.slice(0, VISIBLE_LIMIT);
   const hasMore = pins.length > VISIBLE_LIMIT;
@@ -272,7 +294,11 @@ const PinsSection = () => {
       </button>
       {!collapsed &&
         visible.map((pin) => (
-          <PinItem key={`${pin.conversationId}:${pin.messageId}`} pin={pin} />
+          <PinItem
+            key={`${pin.conversationId}:${pin.messageId}`}
+            pin={pin}
+            onUnpinClick={setUnpinConfirmTarget}
+          />
         ))}
       {!collapsed && hasMore && (
         <button
@@ -304,6 +330,67 @@ const PinsSection = () => {
             <div class="truncate">{expanded ? "Show less" : "More"}</div>
           </div>
         </button>
+      )}
+      {unpinConfirmTarget && (
+        <div
+          class="fixed inset-0 z-50 before:starting:backdrop-blur-0 before:absolute before:inset-0 before:bg-gray-200/50 before:backdrop-blur-[1px] not-motion-reduce:before:transition not-motion-reduce:before:duration-250 dark:before:bg-black/50 before:starting:opacity-0"
+          style="pointer-events: auto;"
+          data-testid="modal-unpin-confirmation"
+        >
+          <button
+            type="button"
+            data-state="open"
+            class="fixed inset-0 z-50 w-full h-full border-none cursor-default before:starting:backdrop-blur-0 before:absolute before:inset-0 before:bg-gray-200/50 before:backdrop-blur-[1px] not-motion-reduce:before:transition not-motion-reduce:before:duration-250 dark:before:bg-black/50 before:starting:opacity-0"
+            style="pointer-events: auto;"
+            onClick={() => setUnpinConfirmTarget(null)}
+          />
+          <div class="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
+            <div
+              role="dialog"
+              class="popover bg-token-bg-primary rounded-2xl shadow-long flex flex-col max-w-md w-full overflow-hidden pointer-events-auto"
+              tabIndex={-1}
+              onClick={(e: MouseEvent) => e.stopPropagation()}
+              onKeyDown={(e: KeyboardEvent) => e.stopPropagation()}
+            >
+              <header class="min-h-header-height flex justify-between p-2.5 ps-4 select-none">
+                <h2 class="text-token-text-primary text-lg font-normal">
+                  Unpin message?
+                </h2>
+              </header>
+              <div class="grow overflow-y-auto p-4 pt-1 min-w-0">
+                <div class="flex gap-1 min-w-0">
+                  <span class="shrink-0">This will remove</span>
+                  <strong
+                    class="truncate min-w-0"
+                    title={unpinConfirmTarget.preview || "Pinned message"}
+                  >
+                    {unpinConfirmTarget.preview || "Pinned message"}
+                  </strong>
+                  <span class="shrink-0">from pinned replies.</span>
+                </div>
+              </div>
+              <div class="flex w-full flex-row items-center text-sm select-none justify-end p-4 pt-0">
+                <div class="flex flex-col gap-3 sm:flex-row-reverse flex w-full flex-row-reverse">
+                  <button
+                    type="button"
+                    class="btn relative btn-danger"
+                    data-testid="unpin-confirm-button"
+                    onClick={handleUnpinConfirm}
+                  >
+                    <div class="flex items-center justify-center">Unpin</div>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn relative btn-secondary"
+                    onClick={() => setUnpinConfirmTarget(null)}
+                  >
+                    <div class="flex items-center justify-center">Cancel</div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

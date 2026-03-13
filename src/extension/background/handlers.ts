@@ -1,0 +1,63 @@
+import type { Pin } from "../../types/messages";
+import { onBackgroundMessage } from "../shared/messaging";
+
+const STORAGE_KEY = "sidethreadgpt-pins";
+const MAX_PINS = 1000;
+
+const readPins = async (): Promise<Pin[]> => {
+  const result = await chrome.storage.sync.get(STORAGE_KEY);
+  const raw = result[STORAGE_KEY];
+  if (!raw) return [];
+  try {
+    return JSON.parse(raw) as Pin[];
+  } catch {
+    return [];
+  }
+};
+
+const writePins = async (pins: Pin[]): Promise<void> => {
+  await chrome.storage.sync.set({
+    [STORAGE_KEY]: JSON.stringify(pins),
+  });
+};
+
+const registerHandlers = () => {
+  onBackgroundMessage("pins-get", async () => readPins());
+
+  onBackgroundMessage("pins-add", async (pin) => {
+    const pins = await readPins();
+    const filtered = pins.filter(
+      (p) =>
+        !(
+          p.conversationId === pin.conversationId &&
+          p.messageId === pin.messageId
+        ),
+    );
+    filtered.unshift(pin);
+    await writePins(filtered.slice(0, MAX_PINS));
+  });
+
+  onBackgroundMessage("pins-remove", async ({ conversationId, messageId }) => {
+    const pins = await readPins();
+    const filtered = pins.filter(
+      (p) =>
+        !(p.conversationId === conversationId && p.messageId === messageId),
+    );
+    await writePins(filtered);
+  });
+
+  onBackgroundMessage(
+    "pins-update-preview",
+    async ({ conversationId, messageId, preview }) => {
+      const pins = await readPins();
+      const updated = pins.map((p) =>
+        p.conversationId === conversationId && p.messageId === messageId
+          ? { ...p, preview }
+          : p,
+      );
+      await writePins(updated);
+    },
+  );
+};
+
+export { registerHandlers };

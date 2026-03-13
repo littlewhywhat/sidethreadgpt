@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import { getConversationIdFromUrl } from "../../../utils/chatgpt";
-import { addPin, isPinned, onPinsChange, removePin } from "../../storage";
+import { addPin, onPinsChange, type Pin, removePin } from "../../storage";
 import * as tooltip from "../tooltip";
 
 type PinButtonProps = {
@@ -33,18 +33,22 @@ const PinButton = ({ available }: PinButtonProps) => {
   const [pinned, setPinned] = useState(false);
 
   useEffect(() => {
-    const check = () => {
+    const update = (pins: Pin[]) => {
       if (!available) return;
       const el = ref.current;
       if (!el) return;
       const conversationId = getConversationIdFromUrl();
       const messageId = resolveMessageId(el);
       if (conversationId && messageId) {
-        setPinned(isPinned(conversationId, messageId));
+        setPinned(
+          pins.some(
+            (p) =>
+              p.conversationId === conversationId && p.messageId === messageId,
+          ),
+        );
       }
     };
-    check();
-    return onPinsChange(check);
+    return onPinsChange(update);
   }, [available]);
 
   const handleClick = (e: MouseEvent) => {
