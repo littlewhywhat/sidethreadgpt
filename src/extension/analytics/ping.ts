@@ -22,8 +22,8 @@ const sendPayload = async (payload: ExtensionEventPayload): Promise<void> => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
-  } catch {
-    // fire-and-forget
+  } catch (err) {
+    console.error("[analytics] sendPayload failed", err);
   }
 };
 

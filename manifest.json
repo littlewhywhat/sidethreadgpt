@@ -17,6 +17,7 @@
     }
   },
   "permissions": ["storage", "alarms"],
+  "host_permissions": ["https://analytics.sidethreadgpt.com/*"],
   "background": {
     "service_worker": "src/extension/background/index.ts",
     "type": "module"
