@@ -1,4 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
+import { trackAction } from "../../analytics";
 import { onContentMessage } from "../../messaging";
 import type { Pin } from "../../storage";
 import { removePin } from "../../storage";
@@ -18,6 +19,7 @@ const UnpinModalHost = () => {
   if (!pin) return null;
 
   const handleConfirm = () => {
+    trackAction("unpin_reply");
     removePin(pin.conversationId, pin.messageId);
     setPin(null);
   };

@@ -16,7 +16,7 @@
       "128": "icons/icon128.png"
     }
   },
-  "permissions": ["storage"],
+  "permissions": ["storage", "alarms"],
   "background": {
     "service_worker": "src/extension/background/index.ts",
     "type": "module"

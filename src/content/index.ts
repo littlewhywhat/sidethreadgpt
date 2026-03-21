@@ -5,6 +5,7 @@ import {
   getLastAssistantMessageId,
   isBranchingAvailable,
 } from "../utils/chatgpt";
+import { trackAction } from "./analytics";
 import { UnpinModalHost } from "./floating/components/UnpinModalHost";
 import {
   getIsSidebarVisible,
@@ -36,8 +37,10 @@ document.addEventListener("keydown", (e) => {
     e.preventDefault();
     if (!isBranchingAvailable()) return;
     if (getIsSidebarVisible()) {
+      trackAction("close_branch");
       hideSidebar();
     } else {
+      trackAction("open_branch");
       showSidebar(getConversationIdFromUrl(), getLastAssistantMessageId());
     }
   }
