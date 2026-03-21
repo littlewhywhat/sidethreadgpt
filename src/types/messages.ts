@@ -8,7 +8,7 @@ type Pin = {
   pinnedAt: number;
 };
 
-type UserAction = "pin_reply" | "unpin_reply" | "open_branch";
+type UserAction = "pin_reply" | "unpin_reply" | "open_branch" | "close_branch";
 
 export { MAX_PINS, INITIAL_PINS_VISIBLE };
 
