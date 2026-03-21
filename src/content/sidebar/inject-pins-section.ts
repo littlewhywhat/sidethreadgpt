@@ -4,17 +4,10 @@ import { PinsSection } from "./components/PinsSection";
 
 const MARKER = "data-sidethreadgpt-pins";
 
-const findYourChatsSection = (): Element | null => {
-  const headers = document.querySelectorAll(
-    ".group\\/sidebar-expando-section h2.__menu-label",
-  );
-  for (const header of headers) {
-    if (header.textContent?.trim().toLowerCase() === "your chats") {
-      return header.closest(".group\\/sidebar-expando-section");
-    }
-  }
-  return null;
-};
+const findYourChatsSection = (): Element | null =>
+  document
+    .querySelector("div#history")
+    ?.closest(".group\\/sidebar-expando-section") ?? null;
 
 const inject = (): (() => void) | null => {
   const chatsSection = findYourChatsSection();

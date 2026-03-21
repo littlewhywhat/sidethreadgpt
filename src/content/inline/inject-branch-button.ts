@@ -10,7 +10,7 @@ import { BranchButton } from "./components/BranchButton";
 
 const ADDED_ATTR = "data-cgpt-branching-added";
 const SELECTOR =
-  'article[data-turn="assistant"] > div > div > div.justify-start > div';
+  'section[data-turn="assistant"] > div > div > div.justify-start > div';
 
 const initBranchChatButtons = () =>
   observe({

@@ -11,10 +11,10 @@ const isBranchingAvailable = (): boolean => {
 };
 
 const getLastAssistantMessageId = (): string | undefined => {
-  const articles = document.querySelectorAll('article[data-turn="assistant"]');
-  if (!articles.length) return undefined;
-  const lastArticle = articles[articles.length - 1];
-  const messageEl = lastArticle.querySelector("div[data-message-id]");
+  const sections = document.querySelectorAll('section[data-turn="assistant"]');
+  if (!sections.length) return undefined;
+  const lastSection = sections[sections.length - 1];
+  const messageEl = lastSection.querySelector("div[data-message-id]");
   return messageEl?.getAttribute("data-message-id") ?? undefined;
 };
 
