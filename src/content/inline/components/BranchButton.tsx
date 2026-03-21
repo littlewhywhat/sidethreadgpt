@@ -1,4 +1,5 @@
 import { useRef } from "preact/hooks";
+import { trackAction } from "../../analytics";
 import * as tooltip from "../tooltip";
 
 type BranchButtonProps = {
@@ -30,6 +31,7 @@ const BranchButton = ({ available, onBranch }: BranchButtonProps) => {
         messageId = any?.getAttribute("data-message-id") ?? undefined;
       }
     }
+    trackAction("open_branch");
     onBranch(messageId);
   };
 

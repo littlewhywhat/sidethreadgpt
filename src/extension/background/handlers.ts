@@ -1,4 +1,5 @@
 import { MAX_PINS, type Pin } from "../../types/messages";
+import { sendUserAction } from "../analytics/ping";
 import { onBackgroundMessage, sendToTab } from "../shared/messaging";
 
 const STORAGE_KEY = "sidethreadgpt-pins";
@@ -66,6 +67,11 @@ const registerHandlers = () => {
     if (sender.tab?.id != null) {
       sendToTab(sender.tab.id, "show-unpin-modal", pin);
     }
+    return undefined;
+  });
+
+  onBackgroundMessage("track-action", (action) => {
+    sendUserAction(action);
     return undefined;
   });
 };

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import { MAX_PINS } from "../../../types/messages";
 import { getConversationIdFromUrl } from "../../../utils/chatgpt";
+import { trackAction } from "../../analytics";
 import { addPin, onPinsChange, type Pin, requestUnpin } from "../../storage";
 import * as tooltip from "../tooltip";
 
@@ -73,6 +74,7 @@ const PinButton = ({ available }: PinButtonProps) => {
         pinnedAt: 0,
       });
     } else {
+      trackAction("pin_reply");
       addPin({
         conversationId,
         messageId,

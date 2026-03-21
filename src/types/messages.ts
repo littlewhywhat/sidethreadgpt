@@ -8,6 +8,8 @@ type Pin = {
   pinnedAt: number;
 };
 
+type UserAction = "pin_reply" | "unpin_reply" | "open_branch";
+
 export { MAX_PINS, INITIAL_PINS_VISIBLE };
 
 type BackgroundMessages = {
@@ -35,6 +37,10 @@ type BackgroundMessages = {
     request: Pin;
     response: undefined;
   };
+  "track-action": {
+    request: UserAction;
+    response: undefined;
+  };
 };
 
 type ContentMessages = {
@@ -44,4 +50,4 @@ type ContentMessages = {
   };
 };
 
-export type { Pin, BackgroundMessages, ContentMessages };
+export type { Pin, UserAction, BackgroundMessages, ContentMessages };
