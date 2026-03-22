@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-03-22
+
 - fix chatgpt selectors
 - track more ways to close sidebar
 
