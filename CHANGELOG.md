@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-03-22
+
 ## [0.5.0] - 2026-03-22
 
 - add analytics + fix chatgpt selectors
