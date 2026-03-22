@@ -1,6 +1,7 @@
 import { h } from "preact";
 import { mountFloating } from "../../common/content/floating/mount";
 import { getBranchUrl } from "../../utils/chatgpt";
+import { trackAction } from "../analytics";
 import { SidebarOverlay } from "./components/SidebarOverlay";
 
 type SidebarState = {
@@ -38,7 +39,13 @@ const showSidebar = (
   const bgColor = getComputedStyle(document.body).backgroundColor;
 
   const { host, dispose } = mountFloating(
-    h(SidebarOverlay, { src, onClose: hideSidebar }),
+    h(SidebarOverlay, {
+      src,
+      onClose: () => {
+        trackAction("close_branch");
+        hideSidebar();
+      },
+    }),
     [
       "position:fixed",
       "z-index:2147483647",

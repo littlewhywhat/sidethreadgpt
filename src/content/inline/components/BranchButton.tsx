@@ -20,14 +20,14 @@ const BranchButton = ({ available, onBranch }: BranchButtonProps) => {
     if (!available) return;
     const btn = ref.current;
     if (!btn) return;
-    const article = btn.closest("article");
+    const section = btn.closest("section");
     let messageId: string | undefined;
-    if (article) {
+    if (section) {
       const nearest = btn.closest("div[data-message-id]");
-      if (nearest && article.contains(nearest)) {
+      if (nearest && section.contains(nearest)) {
         messageId = nearest.getAttribute("data-message-id") ?? undefined;
       } else {
-        const any = article.querySelector("div[data-message-id]");
+        const any = section.querySelector("div[data-message-id]");
         messageId = any?.getAttribute("data-message-id") ?? undefined;
       }
     }

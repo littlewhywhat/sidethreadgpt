@@ -25,11 +25,15 @@ document.body.appendChild(modalContainer);
 mountInline(modalContainer, h(UnpinModalHost, null));
 
 document.addEventListener("click", () => {
-  if (getIsSidebarVisible()) hideSidebar();
+  if (getIsSidebarVisible()) {
+    trackAction("close_branch");
+    hideSidebar();
+  }
 });
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && getIsSidebarVisible()) {
+    trackAction("close_branch");
     hideSidebar();
     return;
   }
