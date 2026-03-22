@@ -2,11 +2,14 @@
 
 ## [Unreleased]
 
+- fix chatgpt selectors
+- track more ways to close sidebar
+
 ## [1.0.0] - 2026-03-22
 
 ## [0.5.0] - 2026-03-22
 
-- add analytics + fix chatgpt selectors
+- add analytics
 
 ## [0.4.0] - 2026-03-11
 
