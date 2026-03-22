@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-03-22
+
 ## [0.4.0] - 2026-03-11
 
 - Refactor to Vite + Preact + TypeScript template
